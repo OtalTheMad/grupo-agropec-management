@@ -60,10 +60,5 @@ namespace ProyectoIsis
                 MessageBox.Show("El usuario o la contraseña son incorrectos.");
             }
         }
-
-        private void btnDebug_Click(object sender, EventArgs e)
-        {
-            dbConexion.ImprimirConexion();
-        }
     }
 }
