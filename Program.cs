@@ -16,7 +16,13 @@ namespace ProyectoIsis
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Home());
+            //Application.Run(new Login());
+
+            var loginForm = new Login();
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new Home());
+            }
         }
     }
 }
