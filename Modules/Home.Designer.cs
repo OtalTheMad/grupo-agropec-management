@@ -28,34 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGestionProductos = new System.Windows.Forms.Button();
+            this.btnVerProductos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnGestionProductos
             // 
-            this.button1.Location = new System.Drawing.Point(44, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(279, 140);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGestionProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(213)))), ((int)(((byte)(186)))));
+            this.btnGestionProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionProductos.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionProductos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnGestionProductos.Location = new System.Drawing.Point(59, 114);
+            this.btnGestionProductos.Name = "btnGestionProductos";
+            this.btnGestionProductos.Padding = new System.Windows.Forms.Padding(10);
+            this.btnGestionProductos.Size = new System.Drawing.Size(280, 140);
+            this.btnGestionProductos.TabIndex = 0;
+            this.btnGestionProductos.Text = "Gestión de Productos";
+            this.btnGestionProductos.UseVisualStyleBackColor = false;
+            // 
+            // btnVerProductos
+            // 
+            this.btnVerProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(213)))), ((int)(((byte)(186)))));
+            this.btnVerProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerProductos.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerProductos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnVerProductos.Location = new System.Drawing.Point(458, 114);
+            this.btnVerProductos.Name = "btnVerProductos";
+            this.btnVerProductos.Padding = new System.Windows.Forms.Padding(10);
+            this.btnVerProductos.Size = new System.Drawing.Size(280, 140);
+            this.btnVerProductos.TabIndex = 0;
+            this.btnVerProductos.Text = "Ver Productos";
+            this.btnVerProductos.UseVisualStyleBackColor = false;
+            this.btnVerProductos.Click += new System.EventHandler(this.btnVerProductos_Click);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
             this.ClientSize = new System.Drawing.Size(800, 510);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVerProductos);
+            this.Controls.Add(this.btnGestionProductos);
             this.Name = "Home";
             this.Text = "Inicio";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGestionProductos;
+        private System.Windows.Forms.Button btnVerProductos;
     }
 }
 
