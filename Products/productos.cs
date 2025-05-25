@@ -24,13 +24,13 @@ namespace ProyectoIsis.Products
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 var row = dataGridView1.SelectedRows[0];
-                txtNombre.Text = row.Cells["NombreProducto"].Value.ToString();
-                txtDescripcion.Text = row.Cells["Descripcion"].Value.ToString();
-                txtPrecio.Text = row.Cells["PrecioPorUnidad"].Value.ToString();
-                txtExistencia.Text = row.Cells["Existencias"].Value.ToString();
+                txtNombre.Text = row.Cells["NombreProducto"].Value?.ToString();
+                txtDescripcion.Text = row.Cells["Descripcion"].Value?.ToString();
+                txtPrecio.Text = row.Cells["PrecioPorUnidad"].Value?.ToString();
+                txtExistencia.Text = row.Cells["Existencias"].Value?.ToString();
             }
         }
 
@@ -77,26 +77,71 @@ namespace ProyectoIsis.Products
         {
         }
 
+        private ToolTip tooltip = new ToolTip();
+
         private bool RegistrarProducto()
         {
+            btnAgregar.Enabled = false;
+
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                tooltip.Show("Campo obligatorio", txtNombre, 2000);
+                txtNombre.BackColor = Color.MistyRose;
+                txtNombre.Focus();
+                btnAgregar.Enabled = true;
+                return false;
+            }
+            else txtNombre.BackColor = SystemColors.Window;
+
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+            {
+                tooltip.Show("Campo obligatorio", txtDescripcion, 2000);
+                txtDescripcion.BackColor = Color.MistyRose;
+                txtDescripcion.Focus();
+                btnAgregar.Enabled = true;
+                return false;
+            }
+            else txtDescripcion.BackColor = SystemColors.Window;
+
+            if (!decimal.TryParse(txtPrecio.Text, out var precio))
+            {
+                tooltip.Show("Solo se permiten números", txtPrecio, 2000);
+                txtPrecio.BackColor = Color.MistyRose;
+                txtPrecio.Focus();
+                btnAgregar.Enabled = true;
+                return false;
+            }
+            else txtPrecio.BackColor = SystemColors.Window;
+
+            if (!int.TryParse(txtExistencia.Text, out var existencias))
+            {
+                tooltip.Show("Solo se permiten números enteros", txtExistencia, 2000);
+                txtExistencia.BackColor = Color.MistyRose;
+                txtExistencia.Focus();
+                btnAgregar.Enabled = true;
+                return false;
+            }
+            else txtExistencia.BackColor = SystemColors.Window;
+
             using (var conn = dbConexion.ObtenerConexion())
             {
                 if (conn == null)
                 {
                     MessageBox.Show("No se pudo conectar a la base de datos.", "Error de Conexión");
+                    btnAgregar.Enabled = true;
                     return false;
                 }
 
                 string query = @"
-                    INSERT INTO Productos (NombreProducto, Descripcion, PrecioPorUnidad, Existencias)
-                    VALUES (@nombre, @descripcion, @precio, @existencias);";
+            INSERT INTO Productos (NombreProducto, Descripcion, PrecioPorUnidad, Existencias)
+            VALUES (@nombre, @descripcion, @precio, @existencias);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
                     cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim());
-                    cmd.Parameters.AddWithValue("@precio", decimal.TryParse(txtPrecio.Text, out var precio) ? precio : 0);
-                    cmd.Parameters.AddWithValue("@existencias", int.TryParse(txtExistencia.Text, out var existencias) ? existencias : 0);
+                    cmd.Parameters.AddWithValue("@precio", precio);
+                    cmd.Parameters.AddWithValue("@existencias", existencias);
 
                     try
                     {
@@ -116,65 +161,120 @@ namespace ProyectoIsis.Products
                     {
                         MessageBox.Show($"❌ Error al registrar el producto:\n{ex.Message}");
                     }
+                    finally
+                    {
+                        btnAgregar.Enabled = true;
+                    }
                 }
             }
+            btnAgregar.Enabled = true;
             return false;
         }
 
         private void ActualizarProducto()
         {
+            btnActualizar.Enabled = false;
+
             if (dataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Seleccione un producto para actualizar.");
+                btnActualizar.Enabled = true;
                 return;
             }
 
-            var id = dataGridView1.SelectedRows[0].Cells["IDProducto"].Value;
+            var row = dataGridView1.SelectedRows[0];
+            var id = row.Cells["IDProducto"].Value;
 
             using (var conn = dbConexion.ObtenerConexion())
             {
                 if (conn == null)
                 {
                     MessageBox.Show("No se pudo conectar a la base de datos.", "Error de Conexión");
+                    btnActualizar.Enabled = true;
                     return;
                 }
 
-                string query = @"
-                    UPDATE Productos
-                    SET NombreProducto = @nombre,
-                        Descripcion = @descripcion,
-                        PrecioPorUnidad = @precio,
-                        Existencias = @existencias
-                    WHERE IDProducto = @id;";
+                var updates = new List<string>();
+                var cmd = new SQLiteCommand { Connection = conn };
 
-                using (var cmd = new SQLiteCommand(query, conn))
+                if (!string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
+                    updates.Add("NombreProducto = @nombre");
                     cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
-                    cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim());
-                    cmd.Parameters.AddWithValue("@precio", decimal.TryParse(txtPrecio.Text, out var precio) ? precio : 0);
-                    cmd.Parameters.AddWithValue("@existencias", int.TryParse(txtExistencia.Text, out var existencias) ? existencias : 0);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    txtNombre.BackColor = SystemColors.Window;
+                }
 
-                    try
+                if (!string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                {
+                    updates.Add("Descripcion = @descripcion");
+                    cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim());
+                    txtDescripcion.BackColor = SystemColors.Window;
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtPrecio.Text))
+                {
+                    if (!decimal.TryParse(txtPrecio.Text, out var precio))
                     {
-                        int rows = cmd.ExecuteNonQuery();
-                        if (rows > 0)
-                        {
-                            MessageBox.Show("✏️ Producto actualizado correctamente.");
-                            LimpiarCampos();
-                        }
-                        else
-                        {
-                            MessageBox.Show("⚠️ No se actualizó ningún producto.");
-                        }
+                        tooltip.Show("Solo se permiten números", txtPrecio, 2000);
+                        txtPrecio.BackColor = Color.MistyRose;
+                        txtPrecio.Focus();
+                        btnActualizar.Enabled = true;
+                        return;
                     }
-                    catch (Exception ex)
+                    updates.Add("PrecioPorUnidad = @precio");
+                    cmd.Parameters.AddWithValue("@precio", precio);
+                    txtPrecio.BackColor = SystemColors.Window;
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtExistencia.Text))
+                {
+                    if (!int.TryParse(txtExistencia.Text, out var existencias))
                     {
-                        MessageBox.Show($"❌ Error al actualizar el producto:\n{ex.Message}");
+                        tooltip.Show("Solo se permiten números enteros", txtExistencia, 2000);
+                        txtExistencia.BackColor = Color.MistyRose;
+                        txtExistencia.Focus();
+                        btnActualizar.Enabled = true;
+                        return;
                     }
+                    updates.Add("Existencias = @existencias");
+                    cmd.Parameters.AddWithValue("@existencias", existencias);
+                    txtExistencia.BackColor = SystemColors.Window;
+                }
+
+                if (updates.Count == 0)
+                {
+                    MessageBox.Show("No hay cambios válidos para actualizar.");
+                    btnActualizar.Enabled = true;
+                    return;
+                }
+
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = $"UPDATE Productos SET {string.Join(", ", updates)} WHERE IDProducto = @id;";
+
+                try
+                {
+                    int rows = cmd.ExecuteNonQuery();
+                    if (rows > 0)
+                    {
+                        MessageBox.Show("✏️ Producto actualizado correctamente.");
+                        LimpiarCampos();
+                    }
+                    else
+                    {
+                        MessageBox.Show("⚠️ No se actualizó ningún producto.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"❌ Error al actualizar el producto:\n{ex.Message}");
+                }
+                finally
+                {
+                    btnActualizar.Enabled = true;
                 }
             }
         }
+
 
         private void CargarProductos()
         {
@@ -193,10 +293,12 @@ namespace ProyectoIsis.Products
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
                     dataGridView1.DataSource = dt;
+
+                    // Elimina selección previa
+                    dataGridView1.ClearSelection();
                 }
             }
         }
-
         private void LimpiarCampos()
         {
             txtNombre.Clear();
@@ -207,22 +309,30 @@ namespace ProyectoIsis.Products
 
         private void EliminarProducto()
         {
+            btnEliminar.Enabled = false;
+
             if (dataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Seleccione un producto para eliminar.");
+                btnEliminar.Enabled = true;
                 return;
             }
 
             var id = dataGridView1.SelectedRows[0].Cells["IDProducto"].Value;
 
             var confirm = MessageBox.Show("¿Está seguro que desea eliminar este producto?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirm != DialogResult.Yes) return;
+            if (confirm != DialogResult.Yes)
+            {
+                btnEliminar.Enabled = true;
+                return;
+            }
 
             using (var conn = dbConexion.ObtenerConexion())
             {
                 if (conn == null)
                 {
                     MessageBox.Show("No se pudo conectar a la base de datos.", "Error de Conexión");
+                    btnEliminar.Enabled = true;
                     return;
                 }
 
@@ -247,8 +357,13 @@ namespace ProyectoIsis.Products
                     {
                         MessageBox.Show($"❌ Error al eliminar el producto:\n{ex.Message}");
                     }
+                    finally
+                    {
+                        btnEliminar.Enabled = true;
+                    }
                 }
             }
         }
+
     }
 }

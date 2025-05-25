@@ -16,5 +16,12 @@ namespace ProyectoIsis
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var formProductos = new ProyectoIsis.Products.productos();
+            formProductos.ShowDialog();
+
+        }
     }
 }
