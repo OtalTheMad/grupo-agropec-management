@@ -19,17 +19,11 @@ namespace ProyectoIsis
             InitializeComponent();
         }
 
-        private void btnGestionProductos_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Productos userProducts = new Productos();
-            userProducts.FormClosed += (s, args) => this.Show();
-            userProducts.Show();
-            this.Hide();
-        }
+            var formProductos = new ProyectoIsis.Products.productos();
+            formProductos.ShowDialog();
 
-        private void btnVerProductos_Click(object sender, EventArgs e)
-        {
-            //Pendiente
         }
     }
 }
