@@ -13,23 +13,23 @@ namespace ProyectoIsis
 {
     public partial class Home : Form
     {
+
         public Home()
         {
             InitializeComponent();
         }
 
-        Productos userProducts = new Productos();
-
         private void btnGestionProductos_Click(object sender, EventArgs e)
         {
+            Productos userProducts = new Productos();
+            userProducts.FormClosed += (s, args) => this.Show();
             userProducts.Show();
-            this.DialogResult = DialogResult.OK;
             this.Hide();
         }
 
         private void btnVerProductos_Click(object sender, EventArgs e)
         {
-
+            //Pendiente
         }
     }
 }
