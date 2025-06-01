@@ -22,7 +22,7 @@ namespace ProyectoIsis.Utilities
             boton.MouseEnter += (s, e) => boton.BackColor = colorHover;
             boton.MouseLeave += (s, e) => boton.BackColor = colorBase;
         }
-        public void AplicarHover(Button boton, string colorBaseHex, string colorTextoHex)
+        public void AplicarFormatoBoton(Button boton, string colorBaseHex, string colorTextoHex)
         {
             Color colorBase = ColorTranslator.FromHtml(colorBaseHex);
             Color colorTexto = ColorTranslator.FromHtml(colorTextoHex);

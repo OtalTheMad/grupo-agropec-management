@@ -34,13 +34,21 @@
             // 
             // btnGestionProductos
             // 
-            this.button1.Location = new System.Drawing.Point(44, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(279, 140);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnGestionProductos.Location = new System.Drawing.Point(88, 54);
+            this.btnGestionProductos.Name = "btnGestionProductos";
+            this.btnGestionProductos.Size = new System.Drawing.Size(279, 140);
+            this.btnGestionProductos.TabIndex = 0;
+            this.btnGestionProductos.Text = "Gestión de Productos";
+            this.btnGestionProductos.UseVisualStyleBackColor = true;
+            this.btnGestionProductos.Click += new System.EventHandler(this.btnVerProductos_Click);
+            // 
+            // btnVerProductos
+            // 
+            this.btnVerProductos.Location = new System.Drawing.Point(439, 54);
+            this.btnVerProductos.Name = "btnVerProductos";
+            this.btnVerProductos.Size = new System.Drawing.Size(279, 140);
+            this.btnVerProductos.TabIndex = 0;
+            this.btnVerProductos.Text = "Ver Productos";
             // 
             // Home
             // 
@@ -51,6 +59,7 @@
             this.Controls.Add(this.btnVerProductos);
             this.Controls.Add(this.btnGestionProductos);
             this.Name = "Home";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio";
             this.ResumeLayout(false);
 

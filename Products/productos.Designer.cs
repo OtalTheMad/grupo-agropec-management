@@ -271,21 +271,7 @@ namespace ProyectoIsis.Products
             this.btnVolver.Text = "⬅️ Volver";
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click_1);
-            // 
-            // btnRegresar
-            // 
-            this.btnRegresar.BackColor = System.Drawing.Color.DarkBlue;
-            this.btnRegresar.FlatAppearance.BorderSize = 0;
-            this.btnRegresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegresar.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnRegresar.ForeColor = System.Drawing.Color.Black;
-            this.btnRegresar.Location = new System.Drawing.Point(485, 10);
-            this.btnRegresar.Name = "btnRegresar";
-            this.btnRegresar.Size = new System.Drawing.Size(104, 28);
-            this.btnRegresar.TabIndex = 2;
-            this.btnRegresar.Text = "↩ Regresar";
-            this.btnRegresar.UseVisualStyleBackColor = false;
-            this.btnRegresar.Click += new System.EventHandler(this.btnRegresar_Click);
+
             // 
             // Productos
             // 

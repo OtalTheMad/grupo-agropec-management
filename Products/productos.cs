@@ -1,15 +1,16 @@
-﻿        using System;
-        using System.Collections.Generic;
-        using System.ComponentModel;
-        using System.Data;
-        using System.Drawing;
-        using System.Linq;
-        using System.Text;
-        using System.Threading.Tasks;
-        using System.Windows.Forms;
-        using System.Data.SQLite;
-        using System.Windows.Forms;
-        using ProyectoIsis.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SQLite;
+using System.Windows.Forms;
+using ProyectoIsis.Data;
+using ProyectoIsis.Utilities;
 
 
 namespace ProyectoIsis.Products
@@ -29,10 +30,10 @@ namespace ProyectoIsis.Products
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 var row = dataGridView1.SelectedRows[0];
-                txtNombre.Text = row.Cells["NombreProducto"].Value?.ToString();
+                txtNombre.Text = row.Cells["Producto"].Value?.ToString();
                 txtDescripcion.Text = row.Cells["Descripcion"].Value?.ToString();
-                txtPrecio.Text = row.Cells["PrecioPorUnidad"].Value?.ToString();
-                txtExistencia.Text = row.Cells["Existencias"].Value?.ToString();
+                txtPrecio.Text = row.Cells["Precio"].Value?.ToString();
+                txtExistencia.Text = row.Cells["CantidadStock"].Value?.ToString();
             }
         }
 
@@ -135,7 +136,7 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            INSERT INTO Productos (NombreProducto, Descripcion, PrecioPorUnidad, Existencias)
+            INSERT INTO Productos (Nombre, Descripcion, Precio, CantidadStock)
             VALUES (@nombre, @descripcion, @precio, @existencias);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
@@ -201,7 +202,7 @@ namespace ProyectoIsis.Products
 
                 if (!string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    updates.Add("NombreProducto = @nombre");
+                    updates.Add("Nombre = @nombre");
                     cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
                     txtNombre.BackColor = SystemColors.Window;
                 }
@@ -223,7 +224,7 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("PrecioPorUnidad = @precio");
+                    updates.Add("Precio = @precio");
                     cmd.Parameters.AddWithValue("@precio", precio);
                     txtPrecio.BackColor = SystemColors.Window;
                 }
@@ -238,7 +239,7 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("Existencias = @existencias");
+                    updates.Add("CantidadStock = @existencias");
                     cmd.Parameters.AddWithValue("@existencias", existencias);
                     txtExistencia.BackColor = SystemColors.Window;
                 }
