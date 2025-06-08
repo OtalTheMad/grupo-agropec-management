@@ -60,28 +60,9 @@ namespace ProyectoIsis.Products
             this.Close();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtPrecio_TextChanged_1(object sender, EventArgs e)
-        {
-        }
-
-        private void txtDescripcion_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtExistencia_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private ToolTip tooltip = new ToolTip();
 
+        #region Metodos de Datos
         private bool RegistrarProducto()
         {
             btnAgregar.Enabled = false;
@@ -136,8 +117,8 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            INSERT INTO Productos (Nombre, Descripcion, Precio, CantidadStock)
-            VALUES (@nombre, @descripcion, @precio, @existencias);";
+                INSERT INTO Productos (Nombre, Descripcion, Precio, CantidadStock)
+                VALUES (@nombre, @descripcion, @precio, @existencias);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
@@ -302,6 +283,8 @@ namespace ProyectoIsis.Products
                 }
             }
         }
+        #endregion
+
         private void LimpiarCampos()
         {
             txtNombre.Clear();

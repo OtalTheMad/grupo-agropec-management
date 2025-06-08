@@ -1,26 +1,53 @@
 ﻿using System;
 using System.Windows.Forms;
 using ProyectoIsis.Utilities;
+using ProyectoIsis.Products;
+using ProyectoIsis.Modules;
 
 namespace ProyectoIsis
 {
     public partial class Home : Form
     {
         Efectos efectos = new Efectos();
+
         public Home()
         {
             InitializeComponent();
-            efectos.AplicarFormatoBoton(this.btnGestionProductos, "#A8D5BA", "#3c3c3c");
-            efectos.AplicarHover(this.btnGestionProductos, "#A8D5BA", "#95C8A3", "#3c3c3c");
-            efectos.AplicarFormatoBoton(this.btnVerProductos, "#A8D5BA", "#3c3c3c");
-            efectos.AplicarHover(this.btnVerProductos, "#A8D5BA", "#95C8A3", "#3c3c3c");
         }
 
 
         private void btnVerProductos_Click(object sender, EventArgs e)
         {
-            var formProductos = new ProyectoIsis.Products.Productos();
+            var vistaProductos = new VistaProducto();
+            vistaProductos.ShowDialog();
+        }
+
+        private void btnBalance_Click(object sender, EventArgs e)
+        {
+            var formProductos = new VistaBalance();
             formProductos.ShowDialog();
+        }
+
+        private void btnGestionProductos_Click(object sender, EventArgs e)
+        {
+            var formProductos = new Productos();
+            formProductos.ShowDialog();
+        }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+            efectos.AplicarFormatoBoton(this.btnGestionProductos, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarHover(this.btnGestionProductos, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnVerProductos, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarHover(this.btnVerProductos, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnBalance, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarHover(this.btnBalance, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnFacturas, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarHover(this.btnFacturas, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnVentas, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarHover(this.btnVentas, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnSalir, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarHover(this.btnSalir, "#A8D5BA", "#95C8A3", "#3c3c3c");
         }
     }
 }
