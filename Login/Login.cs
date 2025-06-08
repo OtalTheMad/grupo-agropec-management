@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Data.SQLite;
 using ProyectoIsis.Data;
+using ProyectoIsis.Utilities;
 
 namespace ProyectoIsis
 {
@@ -14,6 +15,7 @@ namespace ProyectoIsis
 
         private string _user;
         private string _password;
+        private int _idUsuario;
 
         private bool ValidarCredenciales(string _user, string _password)
         {
@@ -29,6 +31,7 @@ namespace ProyectoIsis
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@_idUsuario", _idUsuario);
                     cmd.Parameters.AddWithValue("@usuario", _user);
                     cmd.Parameters.AddWithValue("@password", _password);
 
@@ -52,6 +55,9 @@ namespace ProyectoIsis
 
             if (ValidarCredenciales(_user, _password))
             {
+                // Obtener el ID del usuario para la sesión
+                ObtenerUsuarioLogueado.IDUsuario = _idUsuario;
+                ObtenerUsuarioLogueado.Usuario = _user;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
