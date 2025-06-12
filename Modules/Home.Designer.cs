@@ -96,6 +96,7 @@
             this.btnVentas.Size = new System.Drawing.Size(279, 140);
             this.btnVentas.TabIndex = 5;
             this.btnVentas.Text = "Ventas";
+            this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
             // btnSalir
             // 
@@ -105,6 +106,7 @@
             this.btnSalir.Size = new System.Drawing.Size(279, 140);
             this.btnSalir.TabIndex = 6;
             this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // Home
             // 

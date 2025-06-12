@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpFin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.dgvBalance = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnCalcularBalance = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvBalance = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -49,79 +48,14 @@
             // 
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dtpFin);
-            this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.dtpInicio);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 100);
             this.panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnCalcularBalance);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 350);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 100);
-            this.panel2.TabIndex = 2;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.dgvBalance);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 100);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 250);
-            this.panel3.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Balance";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dtpInicio
-            // 
-            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicio.Location = new System.Drawing.Point(316, 36);
-            this.dtpInicio.Name = "dtpInicio";
-            this.dtpInicio.Size = new System.Drawing.Size(116, 20);
-            this.dtpInicio.TabIndex = 2;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(225, 100);
-            this.splitter1.TabIndex = 3;
-            this.splitter1.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(231, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Desde";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dtpFin
-            // 
-            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFin.Location = new System.Drawing.Point(616, 36);
-            this.dtpFin.Name = "dtpFin";
-            this.dtpFin.Size = new System.Drawing.Size(116, 20);
-            this.dtpFin.TabIndex = 2;
             // 
             // label3
             // 
@@ -134,17 +68,52 @@
             this.label3.Text = "Hasta";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dgvBalance
+            // label2
             // 
-            this.dgvBalance.AllowUserToAddRows = false;
-            this.dgvBalance.AllowUserToDeleteRows = false;
-            this.dgvBalance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBalance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBalance.Location = new System.Drawing.Point(0, 0);
-            this.dgvBalance.Name = "dgvBalance";
-            this.dgvBalance.ReadOnly = true;
-            this.dgvBalance.Size = new System.Drawing.Size(800, 250);
-            this.dgvBalance.TabIndex = 0;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(231, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Desde";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Balance";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dtpFin
+            // 
+            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFin.Location = new System.Drawing.Point(616, 36);
+            this.dtpFin.Name = "dtpFin";
+            this.dtpFin.Size = new System.Drawing.Size(116, 20);
+            this.dtpFin.TabIndex = 2;
+            // 
+            // dtpInicio
+            // 
+            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpInicio.Location = new System.Drawing.Point(316, 36);
+            this.dtpInicio.Name = "dtpInicio";
+            this.dtpInicio.Size = new System.Drawing.Size(116, 20);
+            this.dtpInicio.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnCalcularBalance);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 350);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(800, 100);
+            this.panel2.TabIndex = 2;
             // 
             // btnCalcularBalance
             // 
@@ -156,6 +125,27 @@
             this.btnCalcularBalance.Text = "Calcular Balance";
             this.btnCalcularBalance.UseVisualStyleBackColor = true;
             this.btnCalcularBalance.Click += new System.EventHandler(this.btnCalcularBalance_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.dgvBalance);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 100);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(800, 250);
+            this.panel3.TabIndex = 1;
+            // 
+            // dgvBalance
+            // 
+            this.dgvBalance.AllowUserToAddRows = false;
+            this.dgvBalance.AllowUserToDeleteRows = false;
+            this.dgvBalance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBalance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBalance.Location = new System.Drawing.Point(0, 0);
+            this.dgvBalance.Name = "dgvBalance";
+            this.dgvBalance.ReadOnly = true;
+            this.dgvBalance.Size = new System.Drawing.Size(800, 250);
+            this.dgvBalance.TabIndex = 0;
             // 
             // VistaBalance
             // 
@@ -183,7 +173,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DateTimePicker dtpInicio;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
