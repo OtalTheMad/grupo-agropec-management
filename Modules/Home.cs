@@ -34,6 +34,17 @@ namespace ProyectoIsis
             formProductos.ShowDialog();
         }
 
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            var formVentas =   new Ventas();
+            formVentas.ShowDialog();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void Home_Load(object sender, EventArgs e)
         {
             efectos.AplicarFormatoBoton(this.btnGestionProductos, "#A8D5BA", "#3c3c3c");
