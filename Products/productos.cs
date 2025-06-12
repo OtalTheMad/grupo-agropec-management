@@ -26,11 +26,12 @@ namespace ProyectoIsis.Products
             {
                 var row = dataGridView1.SelectedRows[0];
                 txtNombre.Text = row.Cells["Producto"].Value?.ToString();
-                txtDescripcion.Text = row.Cells["Descripcion"].Value?.ToString();
+                txtDescripcion.Text = row.Cells["Descripción"].Value?.ToString();
                 txtPrecio.Text = row.Cells["Precio"].Value?.ToString();
-                txtExistencia.Text = row.Cells["CantidadStock"].Value?.ToString();
+                txtExistencia.Text = row.Cells["Existencias"].Value?.ToString();
             }
         }
+
 
         private void btnAgregar_Click_1(object sender, EventArgs e)
         {
@@ -55,9 +56,28 @@ namespace ProyectoIsis.Products
             this.Close();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtPrecio_TextChanged_1(object sender, EventArgs e)
+        {
+        }
+
+        private void txtDescripcion_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtExistencia_TextChanged(object sender, EventArgs e)
+        {
+        }
+
         private ToolTip tooltip = new ToolTip();
 
-        #region Metodos de Datos
         private bool RegistrarProducto()
         {
             btnAgregar.Enabled = false;
@@ -112,15 +132,15 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-                INSERT INTO Productos (Nombre, Descripcion, Precio, CantidadStock)
-                VALUES (@nombre, @descripcion, @precio, @existencias);";
+            INSERT INTO Productos (NombreProducto, Descripcion, PrecioPorUnidad, Existencias)
+            VALUES (@NombreProducto, @Descripcion, @PrecioPorUnidad, @Existencias);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
-                    cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim());
-                    cmd.Parameters.AddWithValue("@precio", precio);
-                    cmd.Parameters.AddWithValue("@existencias", existencias);
+                    cmd.Parameters.AddWithValue("@NombreProducto", txtNombre.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Descripcion", txtDescripcion.Text.Trim());
+                    cmd.Parameters.AddWithValue("@PrecioPorUnidad", precio);
+                    cmd.Parameters.AddWithValue("@Existencias", existencias);
 
                     try
                     {
@@ -146,9 +166,12 @@ namespace ProyectoIsis.Products
                     }
                 }
             }
+
             btnAgregar.Enabled = true;
             return false;
         }
+
+
 
         private void ActualizarProducto()
         {
@@ -162,7 +185,7 @@ namespace ProyectoIsis.Products
             }
 
             var row = dataGridView1.SelectedRows[0];
-            var id = row.Cells["IDProducto"].Value;
+            var id = row.Cells["Id"].Value;  // ← usa el alias personalizado del DataGridView
 
             using (var conn = dbConexion.ObtenerConexion())
             {
@@ -178,15 +201,15 @@ namespace ProyectoIsis.Products
 
                 if (!string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    updates.Add("Nombre = @nombre");
-                    cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                    updates.Add("NombreProducto = @NombreProducto");
+                    cmd.Parameters.AddWithValue("@NombreProducto", txtNombre.Text.Trim());
                     txtNombre.BackColor = SystemColors.Window;
                 }
 
                 if (!string.IsNullOrWhiteSpace(txtDescripcion.Text))
                 {
-                    updates.Add("Descripcion = @descripcion");
-                    cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim());
+                    updates.Add("Descripcion = @Descripcion");
+                    cmd.Parameters.AddWithValue("@Descripcion", txtDescripcion.Text.Trim());
                     txtDescripcion.BackColor = SystemColors.Window;
                 }
 
@@ -200,8 +223,8 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("Precio = @precio");
-                    cmd.Parameters.AddWithValue("@precio", precio);
+                    updates.Add("PrecioPorUnidad = @PrecioPorUnidad");
+                    cmd.Parameters.AddWithValue("@PrecioPorUnidad", precio);
                     txtPrecio.BackColor = SystemColors.Window;
                 }
 
@@ -215,8 +238,8 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("CantidadStock = @existencias");
-                    cmd.Parameters.AddWithValue("@existencias", existencias);
+                    updates.Add("Existencias = @Existencias");
+                    cmd.Parameters.AddWithValue("@Existencias", existencias);
                     txtExistencia.BackColor = SystemColors.Window;
                 }
 
@@ -227,8 +250,8 @@ namespace ProyectoIsis.Products
                     return;
                 }
 
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.CommandText = $"UPDATE Productos SET {string.Join(", ", updates)} WHERE IDProducto = @id;";
+                cmd.Parameters.AddWithValue("@IDProducto", id);
+                cmd.CommandText = $"UPDATE Productos SET {string.Join(", ", updates)} WHERE IDProducto = @IDProducto;";
 
                 try
                 {
@@ -255,6 +278,7 @@ namespace ProyectoIsis.Products
         }
 
 
+
         private void CargarProductos()
         {
             using (var conn = dbConexion.ObtenerConexion())
@@ -265,7 +289,16 @@ namespace ProyectoIsis.Products
                     return;
                 }
 
-                string query = "SELECT * FROM Productos";
+                string query = @"
+            SELECT 
+                IDProducto AS 'Id',
+                NombreProducto AS 'Nombre',
+                Descripcion AS 'Descripcion',
+                PrecioPorUnidad AS 'Precio',
+                Existencias,
+                FechaCreacion AS 'Fecha de Creación'
+            FROM Productos";
+
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var adapter = new SQLiteDataAdapter(cmd))
                 {
@@ -278,7 +311,6 @@ namespace ProyectoIsis.Products
                 }
             }
         }
-        #endregion
 
         private void LimpiarCampos()
         {
@@ -299,7 +331,7 @@ namespace ProyectoIsis.Products
                 return;
             }
 
-            var id = dataGridView1.SelectedRows[0].Cells["IDProducto"].Value;
+            var id = dataGridView1.SelectedRows[0].Cells["Id"].Value;
 
             var confirm = MessageBox.Show("¿Está seguro que desea eliminar este producto?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirm != DialogResult.Yes)
