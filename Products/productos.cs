@@ -275,7 +275,7 @@ namespace ProyectoIsis.Products
                 Nombre AS 'Nombre',
                 Descripcion AS 'Descripcion',
                 Precio AS 'Precio',
-                CantidadStock,
+                CantidadStock AS 'Existencias',
                 CreadoEn AS 'Fecha de Creación'
             FROM Productos";
 

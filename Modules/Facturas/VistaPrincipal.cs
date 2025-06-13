@@ -20,24 +20,6 @@ namespace ProyectoIsis.Modules.Facturas
             InitializeComponent();
         }
 
-        //public void GenerarPDF()
-        //{
-        //    if (dgvRecibos.CurrentRow == null)
-        //    {
-        //        MessageBox.Show("Selecciona una factura primero.");
-        //        return;
-        //    }
-
-        //    int idRecibo = Convert.ToInt32(dgvRecibos.CurrentRow.Cells["IDRecibo"].Value);
-        //    var recibo = ObtenerReciboPorID(idRecibo);
-        //    var detalles = ObtenerDetallesPorRecibo(idRecibo);
-
-        //    if (recibo != null && detalles.Any())
-        //        GenerarPDF(recibo, detalles);
-        //    else
-        //        MessageBox.Show("No se pudo generar el PDF. Verifica los datos del recibo.");
-        //}
-
         private void CargarRecibos()
         {
             using (var conn = dbConexion.ObtenerConexion())
@@ -57,7 +39,17 @@ namespace ProyectoIsis.Modules.Facturas
 
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
+            if (dgvRecibos.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un recibo primero.", "Ver Detalle", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // Suponiendo que tenés una columna "IDRecibo" visible o accesible
+            int idRecibo = Convert.ToInt32(dgvRecibos.CurrentRow.Cells["IDRecibo"].Value);
+
+            DetalleFactura detalle = new DetalleFactura(idRecibo);
+            detalle.ShowDialog();
         }
 
         private void VistaPrincipal_Load(object sender, EventArgs e)

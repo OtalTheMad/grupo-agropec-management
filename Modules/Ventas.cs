@@ -8,6 +8,8 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using PdfiumViewer;
+using System.Drawing.Printing;
 
 namespace ProyectoIsis.Modules
 {
@@ -109,6 +111,30 @@ namespace ProyectoIsis.Modules
             else
             {
                 return true;
+            }
+        }
+
+        public void ImprimirFacturaPDF(string rutaArchivoPDF)
+        {
+            using (var document = PdfDocument.Load(rutaArchivoPDF))
+            {
+                using (PrintDialog printDialog = new PrintDialog())
+                {
+                    printDialog.AllowSomePages = true;
+                    printDialog.AllowSelection = false;
+                    printDialog.UseEXDialog = true;
+                    printDialog.PrinterSettings = new PrinterSettings();
+
+                    if (printDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        using (var printDoc = document.CreatePrintDocument())
+                        {
+                            printDoc.PrinterSettings = printDialog.PrinterSettings;
+                            printDoc.PrintController = new StandardPrintController();
+                            printDoc.Print();
+                        }
+                    }
+                }
             }
         }
 
@@ -233,6 +259,7 @@ namespace ProyectoIsis.Modules
                 }
 
                 MessageBox.Show("Venta confirmada con éxito.", "Venta Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ImprimirFacturaPDF(rutaPDF);
             }
             catch (Exception ex)
             {
