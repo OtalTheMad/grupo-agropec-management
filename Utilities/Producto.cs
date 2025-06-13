@@ -14,5 +14,6 @@ namespace ProyectoIsis.Utilities
         public decimal Precio { get; set; }
         public int CantidadStock { get; set; }
         public DateTime CreadoEn { get; set; }
+        public int Impuesto { get; set; }
     }
 }

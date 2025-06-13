@@ -87,6 +87,7 @@
             this.btnFacturas.Size = new System.Drawing.Size(279, 140);
             this.btnFacturas.TabIndex = 4;
             this.btnFacturas.Text = "Facturas";
+            this.btnFacturas.Click += new System.EventHandler(this.btnFacturas_Click);
             // 
             // btnVentas
             // 

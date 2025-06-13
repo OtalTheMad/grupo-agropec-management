@@ -47,6 +47,7 @@
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ISV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nUpCantidad)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -200,7 +201,8 @@
             this.Producto,
             this.Precio,
             this.Cantidad,
-            this.Subtotal});
+            this.Subtotal,
+            this.ISV});
             this.dgvVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVenta.Location = new System.Drawing.Point(0, 0);
             this.dgvVenta.Name = "dgvVenta";
@@ -251,6 +253,14 @@
             this.Subtotal.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Subtotal.Width = 90;
             // 
+            // ISV
+            // 
+            this.ISV.Frozen = true;
+            this.ISV.HeaderText = "ISV";
+            this.ISV.Name = "ISV";
+            this.ISV.ReadOnly = true;
+            this.ISV.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
             // Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,10 +306,11 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dgvVenta;
+        private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
-        private System.Windows.Forms.Button btnQuitar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ISV;
     }
 }

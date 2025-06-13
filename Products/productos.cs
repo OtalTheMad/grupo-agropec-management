@@ -28,7 +28,7 @@ namespace ProyectoIsis.Products
                 txtNombre.Text = row.Cells["Producto"].Value?.ToString();
                 txtDescripcion.Text = row.Cells["Descripción"].Value?.ToString();
                 txtPrecio.Text = row.Cells["Precio"].Value?.ToString();
-                txtExistencia.Text = row.Cells["Existencias"].Value?.ToString();
+                txtExistencia.Text = row.Cells["CantidadStock"].Value?.ToString();
             }
         }
 
@@ -54,26 +54,6 @@ namespace ProyectoIsis.Products
         private void btnVolver_Click_1(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtPrecio_TextChanged_1(object sender, EventArgs e)
-        {
-        }
-
-        private void txtDescripcion_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtExistencia_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private ToolTip tooltip = new ToolTip();
@@ -112,7 +92,7 @@ namespace ProyectoIsis.Products
             }
             else txtPrecio.BackColor = SystemColors.Window;
 
-            if (!int.TryParse(txtExistencia.Text, out var existencias))
+            if (!int.TryParse(txtExistencia.Text, out var CantidadStock))
             {
                 tooltip.Show("Solo se permiten números enteros", txtExistencia, 2000);
                 txtExistencia.BackColor = Color.MistyRose;
@@ -132,15 +112,15 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            INSERT INTO Productos (NombreProducto, Descripcion, PrecioPorUnidad, Existencias)
-            VALUES (@NombreProducto, @Descripcion, @PrecioPorUnidad, @Existencias);";
+            INSERT INTO Productos (Nombre, Descripcion, Precio, CantidadStock)
+            VALUES (@Nombre, @Descripcion, @Precio, @CantidadStock);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@NombreProducto", txtNombre.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text.Trim());
                     cmd.Parameters.AddWithValue("@Descripcion", txtDescripcion.Text.Trim());
-                    cmd.Parameters.AddWithValue("@PrecioPorUnidad", precio);
-                    cmd.Parameters.AddWithValue("@Existencias", existencias);
+                    cmd.Parameters.AddWithValue("@Precio", precio);
+                    cmd.Parameters.AddWithValue("@CantidadStock", CantidadStock);
 
                     try
                     {
@@ -201,8 +181,8 @@ namespace ProyectoIsis.Products
 
                 if (!string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    updates.Add("NombreProducto = @NombreProducto");
-                    cmd.Parameters.AddWithValue("@NombreProducto", txtNombre.Text.Trim());
+                    updates.Add("Nombre = @Nombre");
+                    cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text.Trim());
                     txtNombre.BackColor = SystemColors.Window;
                 }
 
@@ -223,14 +203,14 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("PrecioPorUnidad = @PrecioPorUnidad");
-                    cmd.Parameters.AddWithValue("@PrecioPorUnidad", precio);
+                    updates.Add("Precio = @Precio");
+                    cmd.Parameters.AddWithValue("@Precio", precio);
                     txtPrecio.BackColor = SystemColors.Window;
                 }
 
                 if (!string.IsNullOrWhiteSpace(txtExistencia.Text))
                 {
-                    if (!int.TryParse(txtExistencia.Text, out var existencias))
+                    if (!int.TryParse(txtExistencia.Text, out var CantidadStock))
                     {
                         tooltip.Show("Solo se permiten números enteros", txtExistencia, 2000);
                         txtExistencia.BackColor = Color.MistyRose;
@@ -238,8 +218,8 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("Existencias = @Existencias");
-                    cmd.Parameters.AddWithValue("@Existencias", existencias);
+                    updates.Add("CantidadStock = @CantidadStock");
+                    cmd.Parameters.AddWithValue("@CantidadStock", CantidadStock);
                     txtExistencia.BackColor = SystemColors.Window;
                 }
 
@@ -292,11 +272,11 @@ namespace ProyectoIsis.Products
                 string query = @"
             SELECT 
                 IDProducto AS 'Id',
-                NombreProducto AS 'Nombre',
+                Nombre AS 'Nombre',
                 Descripcion AS 'Descripcion',
-                PrecioPorUnidad AS 'Precio',
-                Existencias,
-                FechaCreacion AS 'Fecha de Creación'
+                Precio AS 'Precio',
+                CantidadStock,
+                CreadoEn AS 'Fecha de Creación'
             FROM Productos";
 
                 using (var cmd = new SQLiteCommand(query, conn))

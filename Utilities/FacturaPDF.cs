@@ -39,11 +39,12 @@ namespace ProyectoIsis.Utilities
             doc.Add(parCliente);
             doc.Add(parFecha);
 
-            Table tabla = new Table(4).UseAllAvailableWidth();
+            Table tabla = new Table(5).UseAllAvailableWidth();
             tabla.AddHeaderCell("Producto");
             tabla.AddHeaderCell("Precio");
             tabla.AddHeaderCell("Cantidad");
             tabla.AddHeaderCell("Subtotal");
+            tabla.AddHeaderCell("ISV");
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -52,6 +53,7 @@ namespace ProyectoIsis.Utilities
                 tabla.AddCell("L. " + item.Precio.ToString("N2"));
                 tabla.AddCell(item.Cantidad.ToString());
                 tabla.AddCell("L. " + item.Subtotal.ToString("N2"));
+                tabla.AddCell(item.Impuesto.ToString());
             }
 
             doc.Add(tabla);

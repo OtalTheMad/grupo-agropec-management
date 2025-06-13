@@ -25,7 +25,8 @@ namespace ProyectoIsis.Modules
             public decimal Precio { get; set; }
             public int Cantidad { get; set; }
             public decimal Subtotal => Precio * Cantidad;
-        }
+            public int Impuesto { get; set; }
+            }
 
 
         #region queries
@@ -35,7 +36,7 @@ namespace ProyectoIsis.Modules
 
             using (var conn = dbConexion.ObtenerConexion())
             {
-                string query = "SELECT IDProducto, Nombre, Precio, CantidadStock FROM Productos ORDER BY Nombre";
+                string query = "SELECT IDProducto, Nombre, Precio, CantidadStock, ISV FROM Productos ORDER BY Nombre";
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -46,7 +47,8 @@ namespace ProyectoIsis.Modules
                             IDProducto = reader.GetInt32(0),
                             Nombre = reader.GetString(1),
                             Precio = reader.GetDecimal(2),
-                            CantidadStock = reader.GetInt32(3)
+                            CantidadStock = reader.GetInt32(3),
+                            Impuesto = reader.GetInt32(4)
                         }); 
                     }
                 }
@@ -180,12 +182,13 @@ namespace ProyectoIsis.Modules
                 IDProducto = producto.IDProducto,
                 Nombre = producto.Nombre,
                 Precio = producto.Precio,
-                Cantidad = cantidad
+                Cantidad = cantidad,
+                Impuesto = producto.Impuesto
             };
 
             listaVenta.Add(item);
 
-            dgvVenta.Rows.Add(item.Nombre, item.Precio.ToString("N2"), item.Cantidad, item.Subtotal.ToString("N2"));
+            dgvVenta.Rows.Add(item.Nombre, item.Precio.ToString("N2"), item.Cantidad, item.Subtotal.ToString("N2"), item.Impuesto.ToString("N2"));
             ActualizarTotal();
         }
         private void btnQuitar_Click(object sender, EventArgs e)

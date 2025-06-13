@@ -55,23 +55,14 @@ namespace ProyectoIsis.Modules.Facturas
             }
         }
 
-        //private void btnVerDetalle_Click(object sender, EventArgs e)
-        //{
-        //    if (dgvRecibos.SelectedRows.Count > 0)
-        //    {
-        //        int idRecibo = Convert.ToInt32(dgvRecibos.SelectedRows[0].Cells["IDRecibo"].Value);
-        //        //VistaDetalle detalleForm = new VistaDetalle(idRecibo);
-        //        detalleForm.ShowDialog();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Por favor, seleccione un recibo para ver los detalles.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //}
+        private void btnVerDetalle_Click(object sender, EventArgs e)
+        {
 
-        //private void btnGenerarFactura_Click(object sender, EventArgs e)
-        //{
+        }
 
-        //}
+        private void VistaPrincipal_Load(object sender, EventArgs e)
+        {
+            CargarRecibos();
+        }
     }
 }

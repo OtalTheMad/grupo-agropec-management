@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using ProyectoIsis.Utilities;
 using ProyectoIsis.Products;
 using ProyectoIsis.Modules;
+using ProyectoIsis.Modules.Facturas;
 
 namespace ProyectoIsis
 {
@@ -38,6 +39,11 @@ namespace ProyectoIsis
         {
             var formVentas =   new Ventas();
             formVentas.ShowDialog();
+        }
+        private void btnFacturas_Click(object sender, EventArgs e)
+        {
+            var formFacturas = new VistaPrincipal();
+            formFacturas.ShowDialog();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
