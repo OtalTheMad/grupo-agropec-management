@@ -110,9 +110,26 @@ namespace ProyectoIsis.Modules
             }
         }
 
+        public int CrearRecibo(string nombreCliente, string creadoPor, int cantidadTotal)
+        {
+            using (var conn = dbConexion.ObtenerConexion())
+            {
+                string query = "INSERT INTO Recibos (NombreCliente, CreadoPor, CreadoEn, CantidadTotal) VALUES (@nombreCliente, @creadoPor, datetime('now'), @cantidad)";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nombreCliente", nombreCliente);
+                    cmd.Parameters.AddWithValue("@creadoPor", creadoPor);
+                    cmd.Parameters.AddWithValue("@cantidadTotal", cantidadTotal);
+                    cmd.Parameters.AddWithValue("@fechaCreacion", DateTime.Now);
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
         private List<ItemVenta> listaVenta = new List<ItemVenta>();
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            string nombreCliente;
             Producto producto = (Producto)cbProducto.SelectedItem;
 
             if (cbProducto.SelectedItem == null)
@@ -125,6 +142,7 @@ namespace ProyectoIsis.Modules
                 txtCliente.Text = "CLIENTE";
             }
 
+            nombreCliente = txtCliente.Text.Trim();
             int cantidad = (int)nUpCantidad.Value;
             if (cantidad <= 0)
             {
