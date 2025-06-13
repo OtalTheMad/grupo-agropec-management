@@ -143,6 +143,7 @@ namespace ProyectoIsis.Modules
                 }
             }
         }
+        #endregion
 
         private List<ItemVenta> listaVenta = new List<ItemVenta>();
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -187,7 +188,26 @@ namespace ProyectoIsis.Modules
             dgvVenta.Rows.Add(item.Nombre, item.Precio.ToString("N2"), item.Cantidad, item.Subtotal.ToString("N2"));
             ActualizarTotal();
         }
-        #endregion
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (dgvVenta.CurrentRow == null || dgvVenta.CurrentRow.Index < 0)
+            {
+                MessageBox.Show("Selecciona un producto para quitar.", "Quitar Producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            string nombreProducto = dgvVenta.CurrentRow.Cells[0].Value.ToString();
+
+            ItemVenta itemAEliminar = listaVenta.FirstOrDefault(i => i.Nombre == nombreProducto);
+            if (itemAEliminar != null)
+            {
+                listaVenta.Remove(itemAEliminar);
+            }
+
+            dgvVenta.Rows.RemoveAt(dgvVenta.CurrentRow.Index);
+
+            ActualizarTotal();
+        }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {

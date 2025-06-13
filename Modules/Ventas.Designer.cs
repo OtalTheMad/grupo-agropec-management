@@ -161,7 +161,7 @@
             this.btnQuitar.TabIndex = 4;
             this.btnQuitar.Text = "Quitar Articulo";
             this.btnQuitar.UseVisualStyleBackColor = true;
-            this.btnQuitar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // panel2
             // 
@@ -204,6 +204,7 @@
             this.dgvVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVenta.Location = new System.Drawing.Point(0, 0);
             this.dgvVenta.Name = "dgvVenta";
+            this.dgvVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVenta.Size = new System.Drawing.Size(800, 166);
             this.dgvVenta.TabIndex = 0;
             // 
