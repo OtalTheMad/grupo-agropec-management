@@ -277,6 +277,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "Ventas";
+            this.ShowIcon = false;
             this.Text = "Ventas";
             this.Load += new System.EventHandler(this.Ventas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nUpCantidad)).EndInit();

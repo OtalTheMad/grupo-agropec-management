@@ -71,10 +71,16 @@
             // 
             // dgvRecibos
             // 
+            this.dgvRecibos.AllowUserToAddRows = false;
+            this.dgvRecibos.AllowUserToDeleteRows = false;
+            this.dgvRecibos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvRecibos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvRecibos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRecibos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecibos.Location = new System.Drawing.Point(0, 0);
             this.dgvRecibos.Name = "dgvRecibos";
+            this.dgvRecibos.ReadOnly = true;
+            this.dgvRecibos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRecibos.Size = new System.Drawing.Size(800, 350);
             this.dgvRecibos.TabIndex = 0;
             // 
@@ -108,6 +114,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "VistaPrincipal";
+            this.ShowIcon = false;
             this.Text = "VistaPrincipal";
             this.Load += new System.EventHandler(this.VistaPrincipal_Load);
             this.panel1.ResumeLayout(false);

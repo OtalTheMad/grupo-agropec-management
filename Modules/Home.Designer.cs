@@ -122,6 +122,7 @@
             this.Controls.Add(this.btnGestionProductos);
             this.Controls.Add(this.panel1);
             this.Name = "Home";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio";
             this.Load += new System.EventHandler(this.Home_Load);

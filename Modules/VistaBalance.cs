@@ -13,6 +13,21 @@ namespace ProyectoIsis.Modules
             InitializeComponent();
         }
 
+        private void CalcularTotales()
+        {
+            //decimal totalIngreso = 0;
+            //decimal totalVenta = 0;
+            decimal totalGanancia = 0;
+
+            foreach (DataGridViewRow row in dgvBalance.Rows)
+            {
+                if (row.Cells["Ganancia"].Value != DBNull.Value)
+                    totalGanancia += Convert.ToDecimal(row.Cells["Ganancia"].Value);
+            }
+            lblTotalGanancia.Text = "Total Ganancia: L. " + totalGanancia.ToString("N2");
+        }
+
+
         private void CalcularBalance()
         {
             using (var conn = dbConexion.ObtenerConexion())
@@ -24,18 +39,19 @@ namespace ProyectoIsis.Modules
                 }
                 string query = @"
                     SELECT IDRecibo, CreadoEn, NombreCliente, Ingreso, TotalVenta, CostoEstimado, Ganancia
-                    FROM VistaBalance;
-                    WHERE DATE(CreadoEn) BETWEEN @Inicio AND @Fin;";
+                    FROM VistaBalance
+                    WHERE CreadoEn >= @Inicio AND CreadoEn <= @Fin;";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Inicio", dtpInicio.Value.Date);
-                    cmd.Parameters.AddWithValue("@Fin", dtpFin.Value.Date.AddDays(1).AddTicks(-1)); // Incluye todo el día final
+                    cmd.Parameters.AddWithValue("@Fin", dtpFin.Value.Date.AddDays(1).AddTicks(-1));
 
                     using (var adapter = new SQLiteDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
                         dgvBalance.DataSource = dt;
+                        CalcularTotales();
 
                         dgvBalance.ClearSelection(); // Limpia selección
                     }

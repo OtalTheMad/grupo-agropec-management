@@ -31,13 +31,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dtpFin = new System.Windows.Forms.DateTimePicker();
             this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCalcularBalance = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvBalance = new System.Windows.Forms.DataGridView();
+            this.lblTotalGanancia = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -79,17 +80,6 @@
             this.label2.Text = "Desde";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Balance";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // dtpFin
             // 
             this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -106,8 +96,20 @@
             this.dtpInicio.Size = new System.Drawing.Size(116, 20);
             this.dtpInicio.TabIndex = 2;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Balance";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblTotalGanancia);
             this.panel2.Controls.Add(this.btnCalcularBalance);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 350);
@@ -147,6 +149,16 @@
             this.dgvBalance.Size = new System.Drawing.Size(800, 250);
             this.dgvBalance.TabIndex = 0;
             // 
+            // lblTotalGanancia
+            // 
+            this.lblTotalGanancia.AutoSize = true;
+            this.lblTotalGanancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalGanancia.Location = new System.Drawing.Point(460, 44);
+            this.lblTotalGanancia.Name = "lblTotalGanancia";
+            this.lblTotalGanancia.Size = new System.Drawing.Size(150, 18);
+            this.lblTotalGanancia.TabIndex = 1;
+            this.lblTotalGanancia.Text = "Total de Ganancia:";
+            // 
             // VistaBalance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +173,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBalance)).EndInit();
             this.ResumeLayout(false);
@@ -179,5 +192,6 @@
         private System.Windows.Forms.DateTimePicker dtpFin;
         private System.Windows.Forms.Button btnCalcularBalance;
         private System.Windows.Forms.DataGridView dgvBalance;
+        private System.Windows.Forms.Label lblTotalGanancia;
     }
 }
