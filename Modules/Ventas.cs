@@ -25,7 +25,8 @@ namespace ProyectoIsis.Modules
             public decimal Precio { get; set; }
             public int Cantidad { get; set; }
             public decimal Subtotal => Precio * Cantidad;
-        }
+            public int Impuesto { get; set; }
+            }
 
 
         #region queries
@@ -35,7 +36,7 @@ namespace ProyectoIsis.Modules
 
             using (var conn = dbConexion.ObtenerConexion())
             {
-                string query = "SELECT IDProducto, Nombre, Precio, CantidadStock FROM Productos ORDER BY Nombre";
+                string query = "SELECT IDProducto, Nombre, Precio, CantidadStock, ISV FROM Productos ORDER BY Nombre";
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -46,7 +47,8 @@ namespace ProyectoIsis.Modules
                             IDProducto = reader.GetInt32(0),
                             Nombre = reader.GetString(1),
                             Precio = reader.GetDecimal(2),
-                            CantidadStock = reader.GetInt32(3)
+                            CantidadStock = reader.GetInt32(3),
+                            Impuesto = reader.GetInt32(4)
                         }); 
                     }
                 }
@@ -110,7 +112,7 @@ namespace ProyectoIsis.Modules
             }
         }
 
-        public int CrearRecibo(string nombreCliente, string creadoPor, int cantidadTotal)
+        public int InsertarRecibo(string nombreCliente, string creadoPor, int cantidadTotal)
         {
             using (var conn = dbConexion.ObtenerConexion())
             {
@@ -119,12 +121,31 @@ namespace ProyectoIsis.Modules
                 {
                     cmd.Parameters.AddWithValue("@nombreCliente", nombreCliente);
                     cmd.Parameters.AddWithValue("@creadoPor", creadoPor);
-                    cmd.Parameters.AddWithValue("@cantidadTotal", cantidadTotal);
-                    cmd.Parameters.AddWithValue("@fechaCreacion", DateTime.Now);
-                    return Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@cantidad", cantidadTotal);
+                    cmd.ExecuteNonQuery();
+
+                    return (int)conn.LastInsertRowId;
                 }
             }
         }
+        private void InsertarDetalleRecibo(int idRecibo, int idProducto, int cantidad, decimal precioUnidad, decimal subtotal)
+        {
+            using (var conn = dbConexion.ObtenerConexion())
+            {
+                string query = "INSERT INTO DetalleRecibos (IDRecibo, IDProducto, Cantidad, PrecioPorUnidad, Subtotal) " +
+                               "VALUES (@idRecibo, @idProducto, @cantidad, @precio, @subtotal)";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idRecibo", idRecibo);
+                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@precio", precioUnidad);
+                    cmd.Parameters.AddWithValue("@subtotal", subtotal);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        #endregion
 
         private List<ItemVenta> listaVenta = new List<ItemVenta>();
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -161,15 +182,35 @@ namespace ProyectoIsis.Modules
                 IDProducto = producto.IDProducto,
                 Nombre = producto.Nombre,
                 Precio = producto.Precio,
-                Cantidad = cantidad
+                Cantidad = cantidad,
+                Impuesto = producto.Impuesto
             };
 
             listaVenta.Add(item);
 
-            dgvVenta.Rows.Add(item.Nombre, item.Precio.ToString("N2"), item.Cantidad, item.Subtotal.ToString("N2"));
+            dgvVenta.Rows.Add(item.Nombre, item.Precio.ToString("N2"), item.Cantidad, item.Subtotal.ToString("N2"), item.Impuesto.ToString("N2"));
             ActualizarTotal();
         }
-        #endregion
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (dgvVenta.CurrentRow == null || dgvVenta.CurrentRow.Index < 0)
+            {
+                MessageBox.Show("Selecciona un producto para quitar.", "Quitar Producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            string nombreProducto = dgvVenta.CurrentRow.Cells[0].Value.ToString();
+
+            ItemVenta itemAEliminar = listaVenta.FirstOrDefault(i => i.Nombre == nombreProducto);
+            if (itemAEliminar != null)
+            {
+                listaVenta.Remove(itemAEliminar);
+            }
+
+            dgvVenta.Rows.RemoveAt(dgvVenta.CurrentRow.Index);
+
+            ActualizarTotal();
+        }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
@@ -197,6 +238,22 @@ namespace ProyectoIsis.Modules
             {
                 MessageBox.Show($"Error al generar la factura: {ex.Message}", "Error de Factura", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            try
+            {
+                int _cantidadTotal = listaVenta.Sum(p => p.Cantidad);
+                int idRecibo = InsertarRecibo(txtCliente.Text, ObtenerUsuarioLogueado.Usuario, _cantidadTotal);
+                
+                foreach (var item in listaVenta)
+                {
+                    InsertarDetalleRecibo(idRecibo, item.IDProducto, item.Cantidad, item.Precio, item.Subtotal);
+                }
+            }
+            catch (Exception facturaException)
+            {
+                MessageBox.Show($"Error al insertar el recibo: {facturaException.Message}", "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
 
             LimpiarVenta();

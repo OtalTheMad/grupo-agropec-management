@@ -38,15 +38,16 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnQuitar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvVenta = new System.Windows.Forms.DataGridView();
-            this.lblTotal = new System.Windows.Forms.Label();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnQuitar = new System.Windows.Forms.Button();
+            this.ISV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nUpCantidad)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -109,7 +110,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAgregar.Location = new System.Drawing.Point(12, 127);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(115, 45);
@@ -121,7 +122,7 @@
             // btnConfirmar
             // 
             this.btnConfirmar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnConfirmar.Location = new System.Drawing.Point(506, 30);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(115, 45);
@@ -133,7 +134,7 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Tomato;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCancelar.Location = new System.Drawing.Point(673, 30);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(115, 45);
@@ -152,6 +153,17 @@
             this.panel1.Size = new System.Drawing.Size(800, 184);
             this.panel1.TabIndex = 5;
             // 
+            // btnQuitar
+            // 
+            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnQuitar.Location = new System.Drawing.Point(184, 127);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(115, 45);
+            this.btnQuitar.TabIndex = 4;
+            this.btnQuitar.Text = "Quitar Articulo";
+            this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lblTotal);
@@ -162,6 +174,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 100);
             this.panel2.TabIndex = 6;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(12, 46);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(47, 13);
+            this.lblTotal.TabIndex = 5;
+            this.lblTotal.Text = "TOTAL";
             // 
             // panel3
             // 
@@ -179,22 +201,14 @@
             this.Producto,
             this.Precio,
             this.Cantidad,
-            this.Subtotal});
+            this.Subtotal,
+            this.ISV});
             this.dgvVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVenta.Location = new System.Drawing.Point(0, 0);
             this.dgvVenta.Name = "dgvVenta";
+            this.dgvVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVenta.Size = new System.Drawing.Size(800, 166);
             this.dgvVenta.TabIndex = 0;
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(12, 46);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(47, 13);
-            this.lblTotal.TabIndex = 5;
-            this.lblTotal.Text = "TOTAL";
             // 
             // Producto
             // 
@@ -239,16 +253,13 @@
             this.Subtotal.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Subtotal.Width = 90;
             // 
-            // btnQuitar
+            // ISV
             // 
-            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitar.Location = new System.Drawing.Point(184, 127);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(115, 45);
-            this.btnQuitar.TabIndex = 4;
-            this.btnQuitar.Text = "Quitar Articulo";
-            this.btnQuitar.UseVisualStyleBackColor = true;
-            this.btnQuitar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.ISV.Frozen = true;
+            this.ISV.HeaderText = "ISV";
+            this.ISV.Name = "ISV";
+            this.ISV.ReadOnly = true;
+            this.ISV.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Ventas
             // 
@@ -295,10 +306,11 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dgvVenta;
+        private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
-        private System.Windows.Forms.Button btnQuitar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ISV;
     }
 }

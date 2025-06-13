@@ -33,7 +33,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvRecibos = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.btnVerDetalle = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -81,23 +80,12 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnGenerarFactura);
             this.panel3.Controls.Add(this.btnVerDetalle);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 350);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(800, 100);
             this.panel3.TabIndex = 2;
-            // 
-            // btnGenerarFactura
-            // 
-            this.btnGenerarFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarFactura.Location = new System.Drawing.Point(162, 32);
-            this.btnGenerarFactura.Name = "btnGenerarFactura";
-            this.btnGenerarFactura.Size = new System.Drawing.Size(115, 45);
-            this.btnGenerarFactura.TabIndex = 1;
-            this.btnGenerarFactura.Text = "Generar Factura";
-            this.btnGenerarFactura.UseVisualStyleBackColor = true;
             // 
             // btnVerDetalle
             // 
@@ -108,6 +96,7 @@
             this.btnVerDetalle.TabIndex = 1;
             this.btnVerDetalle.Text = "Ver \r\nDetalle";
             this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
             // 
             // VistaPrincipal
             // 
@@ -120,6 +109,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "VistaPrincipal";
             this.Text = "VistaPrincipal";
+            this.Load += new System.EventHandler(this.VistaPrincipal_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -137,6 +127,5 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnVerDetalle;
-        private System.Windows.Forms.Button btnGenerarFactura;
     }
 }
