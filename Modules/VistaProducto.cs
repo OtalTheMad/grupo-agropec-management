@@ -60,5 +60,26 @@ namespace ProyectoIsis.Modules
             CargarProductos();
             FormatoDGV();
         }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+            string searchText = txtBuscar.Text;
+
+            using (var conn = dbConexion.ObtenerConexion())
+            {
+                string query = "SELECT * FROM Productos WHERE Nombre LIKE @search";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@search", "%" + searchText + "%");
+
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dgvProductos.DataSource = dt;
+                    lblFilas.Text = $"Total de productos: {dt.Rows.Count}";
+                }
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using ProyectoIsis.Data;
+using ProyectoIsis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,6 +16,7 @@ namespace ProyectoIsis.Modules.Facturas
 {
     public partial class VistaPrincipal : Form
     {
+        Efectos efectos = new Efectos();
         public VistaPrincipal()
         {
             InitializeComponent();
@@ -24,7 +26,13 @@ namespace ProyectoIsis.Modules.Facturas
         {
             using (var conn = dbConexion.ObtenerConexion())
             {
-                string query = "SELECT IDRecibo, NombreCliente, CreadoEn, CantidadTotal FROM Recibos";
+                string query =
+                        @"SELECT
+                           IDRecibo AS 'ID Recibo',
+                           NombreCliente AS 'Cliente',
+                           CreadoEn AS 'Fecha de Creación',
+                           CantidadTotal AS 'Total'
+                        FROM Recibos";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var adapter = new SQLiteDataAdapter(cmd))
@@ -45,8 +53,7 @@ namespace ProyectoIsis.Modules.Facturas
                 return;
             }
 
-            // Suponiendo que tenés una columna "IDRecibo" visible o accesible
-            int idRecibo = Convert.ToInt32(dgvRecibos.CurrentRow.Cells["IDRecibo"].Value);
+            int idRecibo = Convert.ToInt32(dgvRecibos.CurrentRow.Cells["ID Recibo"].Value);
 
             DetalleFactura detalle = new DetalleFactura(idRecibo);
             detalle.ShowDialog();
@@ -55,6 +62,7 @@ namespace ProyectoIsis.Modules.Facturas
         private void VistaPrincipal_Load(object sender, EventArgs e)
         {
             CargarRecibos();
+            efectos.AplicarFormatoBoton(this.btnVerDetalle, "#A8D5BA", "#3c3c3c");
         }
     }
 }

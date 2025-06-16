@@ -51,6 +51,8 @@ namespace ProyectoIsis.Products
             this.panelTop = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPrecioCompra = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelTop.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -61,9 +63,9 @@ namespace ProyectoIsis.Products
             this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtNombre.Location = new System.Drawing.Point(120, 18);
+            this.txtNombre.Location = new System.Drawing.Point(147, 18);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(260, 25);
+            this.txtNombre.Size = new System.Drawing.Size(247, 25);
             this.txtNombre.TabIndex = 1;
             // 
             // txtPrecio
@@ -71,10 +73,10 @@ namespace ProyectoIsis.Products
             this.txtPrecio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
             this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtPrecio.Location = new System.Drawing.Point(120, 63);
+            this.txtPrecio.Location = new System.Drawing.Point(147, 80);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(260, 25);
-            this.txtPrecio.TabIndex = 5;
+            this.txtPrecio.Size = new System.Drawing.Size(247, 25);
+            this.txtPrecio.TabIndex = 3;
             // 
             // txtDescripcion
             // 
@@ -84,17 +86,17 @@ namespace ProyectoIsis.Products
             this.txtDescripcion.Location = new System.Drawing.Point(531, 18);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(311, 25);
-            this.txtDescripcion.TabIndex = 3;
+            this.txtDescripcion.TabIndex = 4;
             // 
             // txtExistencia
             // 
             this.txtExistencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
             this.txtExistencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtExistencia.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtExistencia.Location = new System.Drawing.Point(531, 67);
+            this.txtExistencia.Location = new System.Drawing.Point(531, 49);
             this.txtExistencia.Name = "txtExistencia";
             this.txtExistencia.Size = new System.Drawing.Size(311, 25);
-            this.txtExistencia.TabIndex = 7;
+            this.txtExistencia.TabIndex = 5;
             // 
             // btnAgregar
             // 
@@ -180,7 +182,7 @@ namespace ProyectoIsis.Products
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            this.label1.Location = new System.Drawing.Point(18, 18);
+            this.label1.Location = new System.Drawing.Point(18, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 19);
             this.label1.TabIndex = 0;
@@ -191,11 +193,11 @@ namespace ProyectoIsis.Products
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            this.label2.Location = new System.Drawing.Point(18, 63);
+            this.label2.Location = new System.Drawing.Point(18, 82);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 19);
+            this.label2.Size = new System.Drawing.Size(109, 19);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Precio:";
+            this.label2.Text = "Precio de Venta:";
             // 
             // label3
             // 
@@ -213,7 +215,7 @@ namespace ProyectoIsis.Products
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            this.label4.Location = new System.Drawing.Point(409, 69);
+            this.label4.Location = new System.Drawing.Point(409, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 19);
             this.label4.TabIndex = 6;
@@ -226,7 +228,9 @@ namespace ProyectoIsis.Products
             this.panelTop.Controls.Add(this.txtNombre);
             this.panelTop.Controls.Add(this.label3);
             this.panelTop.Controls.Add(this.txtDescripcion);
+            this.panelTop.Controls.Add(this.label5);
             this.panelTop.Controls.Add(this.label2);
+            this.panelTop.Controls.Add(this.txtPrecioCompra);
             this.panelTop.Controls.Add(this.txtPrecio);
             this.panelTop.Controls.Add(this.label4);
             this.panelTop.Controls.Add(this.txtExistencia);
@@ -267,6 +271,27 @@ namespace ProyectoIsis.Products
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click_1);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            this.label5.Location = new System.Drawing.Point(18, 51);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(123, 19);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Precio de Compra:";
+            // 
+            // txtPrecioCompra
+            // 
+            this.txtPrecioCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
+            this.txtPrecioCompra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPrecioCompra.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtPrecioCompra.Location = new System.Drawing.Point(147, 49);
+            this.txtPrecioCompra.Name = "txtPrecioCompra";
+            this.txtPrecioCompra.Size = new System.Drawing.Size(247, 25);
+            this.txtPrecioCompra.TabIndex = 2;
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,5 +321,7 @@ namespace ProyectoIsis.Products
         #endregion
 
         private System.Windows.Forms.Button btnVolver;
+        private Label label5;
+        private TextBox txtPrecioCompra;
     }
 }

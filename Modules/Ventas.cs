@@ -15,6 +15,7 @@ namespace ProyectoIsis.Modules
 {
     public partial class Ventas : Form
     {
+        Efectos efectos = new Efectos();
         public Ventas()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace ProyectoIsis.Modules
 
             using (var conn = dbConexion.ObtenerConexion())
             {
-                string query = "SELECT IDProducto, Nombre, Precio, CantidadStock, ISV FROM Productos ORDER BY Nombre";
+                string query = "SELECT IDProducto, Nombre, PrecioVenta, CantidadStock, ISV FROM Productos ORDER BY Nombre";
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -289,6 +290,14 @@ namespace ProyectoIsis.Modules
         private void Ventas_Load(object sender, EventArgs e)
         {
             CargarProductos();
+            efectos.AplicarHover(this.btnAgregar, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarHover(this.btnQuitar, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarHover(this.btnConfirmar, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarHover(this.btnCancelar, "#A8D5BA", "#95C8A3", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnAgregar, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnQuitar, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnConfirmar, "#A8D5BA", "#3c3c3c");
+            efectos.AplicarFormatoBoton(this.btnCancelar, "#A8D5BA", "#3c3c3c");
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
