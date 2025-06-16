@@ -27,7 +27,8 @@ namespace ProyectoIsis.Products
                 var row = dataGridView1.SelectedRows[0];
                 txtNombre.Text = row.Cells["Producto"].Value?.ToString();
                 txtDescripcion.Text = row.Cells["Descripción"].Value?.ToString();
-                txtPrecio.Text = row.Cells["Precio"].Value?.ToString();
+                txtPrecioCompra.Text = row.Cells["PrecioCompra"].Value?.ToString();
+                txtPrecio.Text = row.Cells["PrecioVenta"].Value?.ToString();
                 txtExistencia.Text = row.Cells["CantidadStock"].Value?.ToString();
             }
         }
@@ -101,6 +102,16 @@ namespace ProyectoIsis.Products
                 return false;
             }
             else txtExistencia.BackColor = SystemColors.Window;
+            
+            if (!int.TryParse(txtPrecioCompra.Text, out var precioCompra))
+            {
+                tooltip.Show("Solo se permiten números enteros", txtPrecioCompra, 2000);
+                txtPrecioCompra.BackColor = Color.MistyRose;
+                txtPrecioCompra.Focus();
+                btnAgregar.Enabled = true;
+                return false;
+            }
+            else txtPrecioCompra.BackColor = SystemColors.Window;
 
             using (var conn = dbConexion.ObtenerConexion())
             {
@@ -112,14 +123,15 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            INSERT INTO Productos (Nombre, Descripcion, Precio, CantidadStock)
-            VALUES (@Nombre, @Descripcion, @Precio, @CantidadStock);";
+            INSERT INTO Productos (Nombre, Descripcion, PrecioVenta, CantidadStock, PrecioCompra)
+            VALUES (@Nombre, @Descripcion, @PrecioVenta, @CantidadStock, @PrecioCompra);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text.Trim());
                     cmd.Parameters.AddWithValue("@Descripcion", txtDescripcion.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Precio", precio);
+                    cmd.Parameters.AddWithValue("@PrecioVenta", precio);
+                    cmd.Parameters.AddWithValue("@PrecioCompra", precioCompra);
                     cmd.Parameters.AddWithValue("@CantidadStock", CantidadStock);
 
                     try
@@ -203,9 +215,24 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("Precio = @Precio");
-                    cmd.Parameters.AddWithValue("@Precio", precio);
+                    updates.Add("PrecioVenta = @PrecioVenta");
+                    cmd.Parameters.AddWithValue("@PrecioVenta", precio);
                     txtPrecio.BackColor = SystemColors.Window;
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtPrecioCompra.Text))
+                {
+                    if (!decimal.TryParse(txtPrecioCompra.Text, out var precio))
+                    {
+                        tooltip.Show("Solo se permiten números", txtPrecioCompra, 2000);
+                        txtPrecioCompra.BackColor = Color.MistyRose;
+                        txtPrecioCompra.Focus();
+                        btnActualizar.Enabled = true;
+                        return;
+                    }
+                    updates.Add("PrecioVenta = @PrecioCompra");
+                    cmd.Parameters.AddWithValue("@PrecioCompra", precio);
+                    txtPrecioCompra.BackColor = SystemColors.Window;
                 }
 
                 if (!string.IsNullOrWhiteSpace(txtExistencia.Text))
@@ -274,7 +301,8 @@ namespace ProyectoIsis.Products
                 IDProducto AS 'Id',
                 Nombre AS 'Nombre',
                 Descripcion AS 'Descripcion',
-                Precio AS 'Precio',
+                PrecioCompra AS 'Precio de Compra',
+                PrecioVenta AS 'Precio de Venta',
                 CantidadStock AS 'Existencias',
                 CreadoEn AS 'Fecha de Creación'
             FROM Productos";
@@ -298,6 +326,7 @@ namespace ProyectoIsis.Products
             txtDescripcion.Clear();
             txtPrecio.Clear();
             txtExistencia.Clear();
+            txtPrecioCompra.Clear();
         }
 
         private void EliminarProducto()

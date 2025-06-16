@@ -9,8 +9,7 @@ namespace ProyectoIsis.Data
     internal class dbConexion
     {
         private static readonly string dbFileName = "dbGrupoAgropec.sqlite";
-        private static readonly string dbFolder = "Data";
-        private static readonly string dbPath = Path.Combine(Application.StartupPath, dbFolder, dbFileName);
+        private static readonly string dbPath = Path.Combine(Application.StartupPath, dbFileName);
         private static readonly string connectionString = $"Data Source={dbPath};Version=3;";
 
         public static void ImprimirConexion()

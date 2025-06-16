@@ -38,7 +38,7 @@ namespace ProyectoIsis.Modules
                     return;
                 }
                 string query = @"
-                    SELECT IDRecibo, CreadoEn, NombreCliente, Ingreso, TotalVenta, CostoEstimado, Ganancia
+                    SELECT IDRecibo, CreadoEn, NombreCliente, CantidadTotal, TotalVenta, CostoEstimado, Ganancia
                     FROM VistaBalance
                     WHERE CreadoEn >= @Inicio AND CreadoEn <= @Fin;";
                 using (var cmd = new SQLiteCommand(query, conn))
@@ -65,7 +65,7 @@ namespace ProyectoIsis.Modules
                 dgvBalance.Columns[0].HeaderText = "ID Recibo";
                 dgvBalance.Columns[1].HeaderText = "Creado En";
                 dgvBalance.Columns[2].HeaderText = "Nombre del Cliente";
-                dgvBalance.Columns[3].HeaderText = "Ingreso";
+                dgvBalance.Columns[3].HeaderText = "Cantidad Vendida";
                 dgvBalance.Columns[4].HeaderText = "Total Venta";
                 dgvBalance.Columns[5].HeaderText = "Costo Estimado";
                 dgvBalance.Columns[6].HeaderText = "Ganancia";
