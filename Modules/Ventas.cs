@@ -49,7 +49,7 @@ namespace ProyectoIsis.Modules
                         {
                             IDProducto = reader.GetInt32(0),
                             Nombre = reader.GetString(1),
-                            Precio = reader.GetDecimal(2),
+                            Precio = Convert.ToDecimal(reader.GetValue(2)),
                             CantidadStock = reader.GetInt32(3),
                             Impuesto = reader.GetInt32(4)
                         }); 

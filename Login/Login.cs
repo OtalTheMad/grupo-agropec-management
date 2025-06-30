@@ -50,6 +50,7 @@ namespace ProyectoIsis
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(dbConexion.ObtenerRutaDB()); // Imprimir la ruta de la base de datos para depuración
             _user = txtUser.Text;
             _password = txtPassword.Text;
 

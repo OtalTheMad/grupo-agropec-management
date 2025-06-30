@@ -22,16 +22,38 @@ namespace ProyectoIsis.Modules.Facturas
             InitializeComponent();
         }
 
+        private void FormatoDGV()
+        {
+            try
+            {
+                dgvRecibos.Columns[0].HeaderText = "ID Recibo";
+                dgvRecibos.Columns[1].HeaderText = "Cliente";
+                dgvRecibos.Columns[2].HeaderText = "Creado En";
+                dgvRecibos.Columns[3].HeaderText = "Cantidad Vendida";
+                // Ajustar el ancho de las columnas
+                dgvRecibos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvRecibos.AllowUserToAddRows = false;
+                dgvRecibos.AllowUserToDeleteRows = false;
+                dgvRecibos.AllowUserToResizeColumns = true;
+                dgvRecibos.AllowUserToResizeRows = false;
+                dgvRecibos.ReadOnly = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al dar formato a el DataGridView: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void CargarRecibos()
         {
             using (var conn = dbConexion.ObtenerConexion())
             {
                 string query =
                         @"SELECT
-                           IDRecibo AS 'ID Recibo',
-                           NombreCliente AS 'Cliente',
-                           CreadoEn AS 'Fecha de Creación',
-                           CantidadTotal AS 'Total'
+                           IDRecibo,
+                           NombreCliente,
+                           CreadoEn,
+                           CantidadTotal
                         FROM Recibos";
 
                 using (var cmd = new SQLiteCommand(query, conn))
@@ -53,7 +75,7 @@ namespace ProyectoIsis.Modules.Facturas
                 return;
             }
 
-            int idRecibo = Convert.ToInt32(dgvRecibos.CurrentRow.Cells["ID Recibo"].Value);
+            int idRecibo = Convert.ToInt32(dgvRecibos.CurrentRow.Cells["IDRecibo"].Value);
 
             DetalleFactura detalle = new DetalleFactura(idRecibo);
             detalle.ShowDialog();
@@ -62,6 +84,7 @@ namespace ProyectoIsis.Modules.Facturas
         private void VistaPrincipal_Load(object sender, EventArgs e)
         {
             CargarRecibos();
+            FormatoDGV();
             efectos.AplicarFormatoBoton(this.btnVerDetalle, "#A8D5BA", "#3c3c3c");
         }
     }

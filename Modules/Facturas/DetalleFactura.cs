@@ -22,9 +22,32 @@ namespace ProyectoIsis.Modules.Facturas
             this.idRecibo = idRecibo;
         }
 
+        private void FormatoDGV()
+        {
+            try
+            {
+                dgvDetalle.Columns[0].HeaderText = "Nombre";
+                dgvDetalle.Columns[1].HeaderText = "Cantidad";
+                dgvDetalle.Columns[2].HeaderText = "Precio de Venta";
+                // Ajustar el ancho de las columnas
+                dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvDetalle.AllowUserToAddRows = false;
+                dgvDetalle.AllowUserToDeleteRows = false;
+                dgvDetalle.AllowUserToResizeColumns = true;
+                dgvDetalle.AllowUserToResizeRows = false;
+                dgvDetalle.ReadOnly = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al dar formato a el DataGridView: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void DetalleFactura_Load(object sender, EventArgs e)
         {
             CargarDetalle();
+            FormatoDGV();
         }
         private void CargarDetalle()
         {
@@ -32,10 +55,12 @@ namespace ProyectoIsis.Modules.Facturas
             {
                 // Cargar productos
                 string query = @"
-                    SELECT P.Nombre AS Producto, D.Cantidad, D.PrecioPorUnidad AS Precio, D.Subtotal
+                    SELECT P.Nombre, D.Cantidad, D.PrecioPorUnidad, D.Subtotal
                     FROM DetalleRecibos D
                     INNER JOIN Productos P ON D.IDProducto = P.IDProducto
-                    WHERE D.IDRecibo = @idRecibo";
+                    WHERE D.IDRecibo = @idRecibo
+                    GROUP BY P.Nombre
+                    ORDER BY D.Cantidad";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
@@ -62,6 +87,43 @@ namespace ProyectoIsis.Modules.Facturas
                         }
                     }
                 }
+            }
+        }
+
+        private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string colName = dgvDetalle.Columns[e.ColumnIndex].Name;
+
+            switch (colName)
+            {
+                case "PrecioPorUnidad":
+                case "Subtotal":
+                    if (e.Value != null && e.Value != DBNull.Value)
+                    {
+                        decimal valor;
+                        if (e.Value is decimal dec)
+                            valor = dec;
+                        else if (e.Value is double dbl)
+                            valor = Convert.ToDecimal(dbl);
+                        else if (decimal.TryParse(e.Value.ToString(), out var parsed))
+                            valor = parsed;
+                        else
+                            return;
+
+                        e.Value = $"L. {valor:N2}";
+                        e.FormattingApplied = true;
+                    }
+                    break;
+                case "Cantidad":
+                    if (e.Value != null && e.Value != DBNull.Value)
+                    {
+                        if (int.TryParse(e.Value.ToString(), out int cantidad))
+                        {
+                            e.Value = cantidad.ToString("N0");
+                            e.FormattingApplied = true;
+                        }
+                    }
+                    break;
             }
         }
     }
