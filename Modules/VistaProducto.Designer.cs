@@ -34,9 +34,9 @@
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lblFilas = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblFilas = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.panel2.SuspendLayout();
@@ -69,7 +69,9 @@
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.Location = new System.Drawing.Point(0, 0);
+            this.dgvProductos.MultiSelect = false;
             this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(800, 350);
             this.dgvProductos.TabIndex = 2;
             // 
@@ -94,16 +96,13 @@
             this.panel3.Size = new System.Drawing.Size(800, 100);
             this.panel3.TabIndex = 3;
             // 
-            // lblFilas
+            // txtBuscar
             // 
-            this.lblFilas.AutoSize = true;
-            this.lblFilas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilas.Location = new System.Drawing.Point(22, 43);
-            this.lblFilas.Name = "lblFilas";
-            this.lblFilas.Size = new System.Drawing.Size(138, 25);
-            this.lblFilas.TabIndex = 0;
-            this.lblFilas.Text = "labelConteo";
-            this.lblFilas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtBuscar.Location = new System.Drawing.Point(578, 46);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(184, 20);
+            this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // label2
             // 
@@ -116,13 +115,16 @@
             this.label2.Text = "Buscar";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtBuscar
+            // lblFilas
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(578, 46);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(184, 20);
-            this.txtBuscar.TabIndex = 1;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            this.lblFilas.AutoSize = true;
+            this.lblFilas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFilas.Location = new System.Drawing.Point(22, 43);
+            this.lblFilas.Name = "lblFilas";
+            this.lblFilas.Size = new System.Drawing.Size(138, 25);
+            this.lblFilas.TabIndex = 0;
+            this.lblFilas.Text = "labelConteo";
+            this.lblFilas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // VistaProducto
             // 
@@ -135,7 +137,8 @@
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VistaProducto";
-            this.Text = "VistaProducto";
+            this.ShowIcon = false;
+            this.Text = "Vista de Productos";
             this.Load += new System.EventHandler(this.VistaProducto_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

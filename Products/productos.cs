@@ -20,19 +20,39 @@ namespace ProyectoIsis.Products
             CargarProductos();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void FormatoDGV()
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+
+            //IDProducto AS 'Id',
+            //    Nombre AS 'Nombre',
+            //    Descripcion AS 'Descripcion',
+            //    PrecioCompra AS 'Precio de Compra',
+            //    PrecioVenta AS 'Precio de Venta',
+            //    CantidadStock AS 'Existencias',
+            //    CreadoEn AS 'Fecha de Creación'
+
+            try
             {
-                var row = dataGridView1.SelectedRows[0];
-                txtNombre.Text = row.Cells["Producto"].Value?.ToString();
-                txtDescripcion.Text = row.Cells["Descripción"].Value?.ToString();
-                txtPrecioCompra.Text = row.Cells["PrecioCompra"].Value?.ToString();
-                txtPrecio.Text = row.Cells["PrecioVenta"].Value?.ToString();
-                txtExistencia.Text = row.Cells["CantidadStock"].Value?.ToString();
+                dataGridView1.Columns[0].HeaderText = "ID Producto";
+                dataGridView1.Columns[1].HeaderText = "Nombre";
+                dataGridView1.Columns[2].HeaderText = "Descripcion";
+                dataGridView1.Columns[3].HeaderText = "Precio de Compra";
+                dataGridView1.Columns[4].HeaderText = "Precio de Venta";
+                dataGridView1.Columns[5].HeaderText = "Existencias";
+                dataGridView1.Columns[6].HeaderText = "Creado En";
+                // Ajustar el ancho de las columnas
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.AllowUserToDeleteRows = false;
+                dataGridView1.AllowUserToResizeColumns = true;
+                dataGridView1.AllowUserToResizeRows = false;
+                dataGridView1.ReadOnly = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al dar formato a el DataGridView: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void btnAgregar_Click_1(object sender, EventArgs e)
         {
@@ -387,5 +407,25 @@ namespace ProyectoIsis.Products
             }
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                DataGridViewRow fila = dataGridView1.CurrentRow;
+
+                txtNombre.Text = fila.Cells["Nombre"].Value?.ToString();
+                txtDescripcion.Text = fila.Cells["Descripcion"].Value?.ToString();
+                txtPrecioCompra.Text = fila.Cells["Precio de Compra"].Value?.ToString();
+                txtPrecio.Text = fila.Cells["Precio de Venta"].Value?.ToString();
+                txtExistencia.Text = fila.Cells["Existencias"].Value?.ToString();
+            }
+        }
+
+        private void Productos_Load(object sender, EventArgs e)
+        {
+            FormatoDGV();
+            dataGridView1.ClearSelection();
+            LimpiarCampos();
+        }
     }
 }

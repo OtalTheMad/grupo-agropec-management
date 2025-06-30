@@ -35,10 +35,10 @@
             this.dtpInicio = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTotalGanancia = new System.Windows.Forms.Label();
             this.btnCalcularBalance = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvBalance = new System.Windows.Forms.DataGridView();
-            this.lblTotalGanancia = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -55,7 +55,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 100);
+            this.panel1.Size = new System.Drawing.Size(1157, 100);
             this.panel1.TabIndex = 0;
             // 
             // label3
@@ -112,10 +112,20 @@
             this.panel2.Controls.Add(this.lblTotalGanancia);
             this.panel2.Controls.Add(this.btnCalcularBalance);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 350);
+            this.panel2.Location = new System.Drawing.Point(0, 572);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 100);
+            this.panel2.Size = new System.Drawing.Size(1157, 100);
             this.panel2.TabIndex = 2;
+            // 
+            // lblTotalGanancia
+            // 
+            this.lblTotalGanancia.AutoSize = true;
+            this.lblTotalGanancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalGanancia.Location = new System.Drawing.Point(460, 44);
+            this.lblTotalGanancia.Name = "lblTotalGanancia";
+            this.lblTotalGanancia.Size = new System.Drawing.Size(150, 18);
+            this.lblTotalGanancia.TabIndex = 1;
+            this.lblTotalGanancia.Text = "Total de Ganancia:";
             // 
             // btnCalcularBalance
             // 
@@ -134,41 +144,36 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 100);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 250);
+            this.panel3.Size = new System.Drawing.Size(1157, 472);
             this.panel3.TabIndex = 1;
             // 
             // dgvBalance
             // 
             this.dgvBalance.AllowUserToAddRows = false;
             this.dgvBalance.AllowUserToDeleteRows = false;
+            this.dgvBalance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBalance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBalance.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBalance.Location = new System.Drawing.Point(0, 0);
+            this.dgvBalance.MultiSelect = false;
             this.dgvBalance.Name = "dgvBalance";
             this.dgvBalance.ReadOnly = true;
-            this.dgvBalance.Size = new System.Drawing.Size(800, 250);
+            this.dgvBalance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBalance.Size = new System.Drawing.Size(1157, 472);
             this.dgvBalance.TabIndex = 0;
-            // 
-            // lblTotalGanancia
-            // 
-            this.lblTotalGanancia.AutoSize = true;
-            this.lblTotalGanancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalGanancia.Location = new System.Drawing.Point(460, 44);
-            this.lblTotalGanancia.Name = "lblTotalGanancia";
-            this.lblTotalGanancia.Size = new System.Drawing.Size(150, 18);
-            this.lblTotalGanancia.TabIndex = 1;
-            this.lblTotalGanancia.Text = "Total de Ganancia:";
+            this.dgvBalance.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBalance_CellFormatting);
             // 
             // VistaBalance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1157, 672);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "VistaBalance";
+            this.ShowIcon = false;
             this.Text = "Balance";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
