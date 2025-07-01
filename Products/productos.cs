@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Data.SQLite;
+﻿using iText.Layout.Element;
 using ProyectoIsis.Data;
 using ProyectoIsis.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace ProyectoIsis.Products
@@ -22,15 +23,6 @@ namespace ProyectoIsis.Products
 
         private void FormatoDGV()
         {
-
-            //IDProducto AS 'Id',
-            //    Nombre AS 'Nombre',
-            //    Descripcion AS 'Descripcion',
-            //    PrecioCompra AS 'Precio de Compra',
-            //    PrecioVenta AS 'Precio de Venta',
-            //    CantidadStock AS 'Existencias',
-            //    CreadoEn AS 'Fecha de Creación'
-
             try
             {
                 dataGridView1.Columns[0].HeaderText = "ID Producto";
@@ -143,8 +135,8 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            INSERT INTO Productos (Nombre, Descripcion, PrecioVenta, CantidadStock, PrecioCompra)
-            VALUES (@Nombre, @Descripcion, @PrecioVenta, @CantidadStock, @PrecioCompra);";
+            INSERT INTO Productos (Nombre, Descripcion, PrecioVenta, CantidadStock, CreadoEn, PrecioCompra)
+            VALUES (@Nombre, @Descripcion, @PrecioVenta, @CantidadStock, @creadoEn, @PrecioCompra);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
@@ -153,6 +145,7 @@ namespace ProyectoIsis.Products
                     cmd.Parameters.AddWithValue("@PrecioVenta", precio);
                     cmd.Parameters.AddWithValue("@PrecioCompra", precioCompra);
                     cmd.Parameters.AddWithValue("@CantidadStock", CantidadStock);
+                    cmd.Parameters.AddWithValue("@creadoEn", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                     try
                     {
@@ -426,6 +419,30 @@ namespace ProyectoIsis.Products
             FormatoDGV();
             dataGridView1.ClearSelection();
             LimpiarCampos();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un producto primero.", "Modificar Producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            var idCell = dataGridView1.CurrentRow.Cells["Id"].Value;
+
+            if (idCell == null || !int.TryParse(idCell.ToString(), out int idProducto))
+            {
+                MessageBox.Show("El producto seleccionado no tiene un ID válido.", "Modificar Producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ModificarProductos modProductos = new ModificarProductos(idProducto);
+            modProductos.ShowDialog();
+
+            if (modProductos.Successful)
+            {
+                CargarProductos();
+            }
         }
     }
 }

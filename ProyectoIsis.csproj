@@ -270,6 +270,12 @@
     <Compile Include="Modules\VistaProducto.Designer.cs">
       <DependentUpon>VistaProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\ModificarProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\ModificarProductos.Designer.cs">
+      <DependentUpon>ModificarProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Productos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Logos\appLogo.png" />
+    <EmbeddedResource Include="Resources\Logos\serviciosAgropec_mainlogo.png" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -313,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\VistaProducto.resx">
       <DependentUpon>VistaProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ModificarProductos.resx">
+      <DependentUpon>ModificarProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>

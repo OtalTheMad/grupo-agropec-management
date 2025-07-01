@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using ProyectoIsis.Data;
@@ -66,6 +67,14 @@ namespace ProyectoIsis
             {
                 MessageBox.Show("El usuario o la contraseña son incorrectos.");
             }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            string versionString = version.ToString();
+
+            lblDev.Text = $"Desarrollado por Oscar Marcía - V{versionString}";
         }
     }
 }
