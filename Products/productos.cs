@@ -310,15 +310,16 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            SELECT 
-                IDProducto AS 'Id',
-                Nombre AS 'Nombre',
-                Descripcion AS 'Descripcion',
-                PrecioCompra AS 'Precio de Compra',
-                PrecioVenta AS 'Precio de Venta',
-                CantidadStock AS 'Existencias',
-                CreadoEn AS 'Fecha de Creación'
-            FROM Productos";
+                    SELECT 
+                        IDProducto AS 'Id',
+                        Nombre AS 'Nombre',
+                        Descripcion AS 'Descripcion',
+                        PrecioCompra AS 'Precio de Compra',
+                        PrecioVenta AS 'Precio de Venta',
+                        CantidadStock AS 'Existencias',
+                        CreadoEn AS 'Fecha de Creación'
+                    FROM Productos
+                    WHERE esVisible = 1";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 using (var adapter = new SQLiteDataAdapter(cmd))
@@ -354,6 +355,7 @@ namespace ProyectoIsis.Products
             }
 
             var id = dataGridView1.SelectedRows[0].Cells["Id"].Value;
+            var rows = dataGridView1.SelectedRows.Count;
 
             var confirm = MessageBox.Show("¿Está seguro que desea eliminar este producto?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirm != DialogResult.Yes)
@@ -371,17 +373,18 @@ namespace ProyectoIsis.Products
                     return;
                 }
 
-                string query = "DELETE FROM Productos WHERE IDProducto = @id";
+                string query = "UPDATE Productos SET esVisible = 0 WHERE IDProducto = @id";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     try
                     {
-                        int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
                         {
+                            cmd.ExecuteNonQuery();
                             MessageBox.Show("🗑 Producto eliminado correctamente.");
+                            CargarProductos();
                         }
                         else
                         {
