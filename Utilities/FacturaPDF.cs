@@ -122,6 +122,35 @@ namespace ProyectoIsis.Utilities
                 .SetFontSize(14);
 
             doc.Add(parTotal);
+
+            // Footer
+            doc.Add(new Paragraph("\n\n"));
+            Table tablaFooter = new Table(1).UseAllAvailableWidth();
+            tablaFooter.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+
+            tablaFooter.AddCell(
+                new Cell()
+                    .Add(new Paragraph("¡Si tienes preguntas no dudes en contactarnos!").SetFontSize(8))
+                    .SetBorder(iText.Layout.Borders.Border.NO_BORDER)
+                    .SetTextAlignment(TextAlignment.CENTER)
+            );
+
+            tablaFooter.AddCell(
+                new Cell()
+                    .Add(new Paragraph("Tel: 9805-9036   Gmail: serviciosagropec@gmail.com   Facebook: Servicios Agropec").SetFontSize(8))
+                    .SetBorder(iText.Layout.Borders.Border.NO_BORDER)
+                    .SetTextAlignment(TextAlignment.CENTER)
+            );
+
+            tablaFooter.AddCell(
+                new Cell()
+                    .Add(new Paragraph("AGRADECEMOS TU PREFERENCIA").SetFontSize(9).SimulateBold())
+                    .SetBorder(iText.Layout.Borders.Border.NO_BORDER)
+                    .SetTextAlignment(TextAlignment.CENTER)
+            );
+
+            doc.Add(tablaFooter);
+
             doc.Close();
         }
     }

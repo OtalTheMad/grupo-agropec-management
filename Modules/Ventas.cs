@@ -331,5 +331,19 @@ namespace ProyectoIsis.Modules
                 }
             }
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            using (var vista = new VistaProducto())
+            {
+                var result = vista.ShowDialog();
+                if (result == DialogResult.OK && vista.ProductoSeleccionado != null)
+                {
+                    var producto = vista.ProductoSeleccionado;
+
+                    cbProducto.SelectedItem = cbProducto.Items.Cast<Producto>().FirstOrDefault(p => p.IDProducto == producto.IDProducto);
+                }
+            }
+        }
     }
 }

@@ -48,6 +48,7 @@
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ISV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nUpCantidad)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -59,7 +60,7 @@
             // 
             this.txtCliente.Location = new System.Drawing.Point(96, 12);
             this.txtCliente.Name = "txtCliente";
-            this.txtCliente.Size = new System.Drawing.Size(203, 20);
+            this.txtCliente.Size = new System.Drawing.Size(338, 20);
             this.txtCliente.TabIndex = 0;
             // 
             // label1
@@ -78,7 +79,7 @@
             this.cbProducto.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cbProducto.Location = new System.Drawing.Point(96, 49);
             this.cbProducto.Name = "cbProducto";
-            this.cbProducto.Size = new System.Drawing.Size(203, 21);
+            this.cbProducto.Size = new System.Drawing.Size(338, 21);
             this.cbProducto.TabIndex = 2;
             this.cbProducto.SelectedIndexChanged += new System.EventHandler(this.cbProducto_SelectedIndexChanged);
             // 
@@ -146,6 +147,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnBuscar);
             this.panel1.Controls.Add(this.btnQuitar);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -198,6 +200,7 @@
             // dgvVenta
             // 
             this.dgvVenta.AllowUserToAddRows = false;
+            this.dgvVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -208,6 +211,7 @@
             this.dgvVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVenta.Location = new System.Drawing.Point(0, 0);
             this.dgvVenta.Name = "dgvVenta";
+            this.dgvVenta.RowHeadersVisible = false;
             this.dgvVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVenta.Size = new System.Drawing.Size(800, 166);
             this.dgvVenta.TabIndex = 0;
@@ -215,29 +219,24 @@
             // Producto
             // 
             this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Producto.Frozen = true;
             this.Producto.HeaderText = "Producto";
             this.Producto.MinimumWidth = 400;
             this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
             this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Producto.Width = 400;
             // 
             // Precio
             // 
             this.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Precio.Frozen = true;
             this.Precio.HeaderText = "Precio";
             this.Precio.MinimumWidth = 90;
             this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
             this.Precio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Precio.Width = 90;
             // 
             // Cantidad
             // 
             this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Cantidad.Frozen = true;
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.MinimumWidth = 90;
             this.Cantidad.Name = "Cantidad";
@@ -247,21 +246,27 @@
             // Subtotal
             // 
             this.Subtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Subtotal.Frozen = true;
             this.Subtotal.HeaderText = "Subtotal";
             this.Subtotal.MinimumWidth = 90;
             this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
             this.Subtotal.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Subtotal.Width = 90;
             // 
             // ISV
             // 
-            this.ISV.Frozen = true;
             this.ISV.HeaderText = "ISV";
             this.ISV.Name = "ISV";
-            this.ISV.ReadOnly = true;
             this.ISV.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(440, 49);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(29, 21);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "🔎︎";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // Ventas
             // 
@@ -315,5 +320,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ISV;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
