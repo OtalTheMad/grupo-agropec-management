@@ -66,5 +66,9 @@ namespace ProyectoIsis
             efectos.AplicarFormatoBoton(this.btnSalir, "#A8D5BA", "#3c3c3c");
             efectos.AplicarHover(this.btnSalir, "#A8D5BA", "#95C8A3", "#3c3c3c");
         }
+        private void usuariosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
