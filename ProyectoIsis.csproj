@@ -240,6 +240,12 @@
     <Compile Include="Modules\Facturas\VistaPrincipal.Designer.cs">
       <DependentUpon>VistaPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\ControlDeUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ControlDeUsuario.Designer.cs">
+      <DependentUpon>ControlDeUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,6 +302,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Logos\appLogo.png" />
+    <EmbeddedResource Include="Modules\ControlDeUsuario.resx">
+      <DependentUpon>ControlDeUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Logos\serviciosAgropec_mainlogo.png" />
     <Content Include="prod\app.publish\ProyectoIsis.exe" />
     <Content Include="prod\x64\SQLite.Interop.dll" />

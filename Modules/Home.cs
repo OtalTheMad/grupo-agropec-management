@@ -68,7 +68,8 @@ namespace ProyectoIsis
         }
         private void usuariosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            var formUsuarios = new ControlDeUsuario();
+            formUsuarios.ShowDialog();
         }
     }
 }
