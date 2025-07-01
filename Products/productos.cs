@@ -135,8 +135,8 @@ namespace ProyectoIsis.Products
                 }
 
                 string query = @"
-            INSERT INTO Productos (Nombre, Descripcion, PrecioVenta, CantidadStock, PrecioCompra)
-            VALUES (@Nombre, @Descripcion, @PrecioVenta, @CantidadStock, @PrecioCompra);";
+            INSERT INTO Productos (Nombre, Descripcion, PrecioVenta, CantidadStock, CreadoEn, PrecioCompra)
+            VALUES (@Nombre, @Descripcion, @PrecioVenta, @CantidadStock, @creadoEn, @PrecioCompra);";
 
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
@@ -145,6 +145,7 @@ namespace ProyectoIsis.Products
                     cmd.Parameters.AddWithValue("@PrecioVenta", precio);
                     cmd.Parameters.AddWithValue("@PrecioCompra", precioCompra);
                     cmd.Parameters.AddWithValue("@CantidadStock", CantidadStock);
+                    cmd.Parameters.AddWithValue("@creadoEn", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                     try
                     {

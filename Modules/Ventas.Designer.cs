@@ -80,6 +80,7 @@
             this.cbProducto.Name = "cbProducto";
             this.cbProducto.Size = new System.Drawing.Size(203, 21);
             this.cbProducto.TabIndex = 2;
+            this.cbProducto.SelectedIndexChanged += new System.EventHandler(this.cbProducto_SelectedIndexChanged);
             // 
             // label2
             // 

@@ -19,6 +19,7 @@ namespace ProyectoIsis.Modules
         public Ventas()
         {
             InitializeComponent();
+            
         }
 
         public class ItemVenta
@@ -45,6 +46,7 @@ namespace ProyectoIsis.Modules
                 {
                     while (reader.Read())
                     {
+                        
                         productos.Add(new Producto
                         {
                             IDProducto = reader.GetInt32(0),
@@ -52,7 +54,7 @@ namespace ProyectoIsis.Modules
                             Precio = Convert.ToDecimal(reader.GetValue(2)),
                             CantidadStock = reader.GetInt32(3),
                             Impuesto = reader.GetInt32(4)
-                        }); 
+                        });
                     }
                 }
             }
@@ -143,11 +145,12 @@ namespace ProyectoIsis.Modules
         {
             using (var conn = dbConexion.ObtenerConexion())
             {
-                string query = "INSERT INTO Recibos (NombreCliente, CreadoPor, CreadoEn, CantidadTotal) VALUES (@nombreCliente, @creadoPor, datetime('now'), @cantidad)";
+                string query = "INSERT INTO Recibos (NombreCliente, CreadoPor, CreadoEn, CantidadTotal) VALUES (@nombreCliente, @creadoPor, @creadoEn, @cantidad)";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@nombreCliente", nombreCliente);
                     cmd.Parameters.AddWithValue("@creadoPor", creadoPor);
+                    cmd.Parameters.AddWithValue("@creadoEn", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@cantidad", cantidadTotal);
                     cmd.ExecuteNonQuery();
 
@@ -303,6 +306,30 @@ namespace ProyectoIsis.Modules
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbProducto.SelectedValue is int idProducto)
+            {
+                using (var conn = dbConexion.ObtenerConexion())
+                {
+                    string query = "SELECT CantidadStock FROM Productos WHERE IDProducto = @idProducto";
+                    using (var cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                        var cantidadStock = cmd.ExecuteScalar();
+                        if (cantidadStock != null)
+                        {
+                            nUpCantidad.Maximum = Convert.ToInt32(cantidadStock);
+                        }
+                        else
+                        {
+                            nUpCantidad.Maximum = 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }
