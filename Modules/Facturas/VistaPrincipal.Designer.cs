@@ -113,6 +113,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "VistaPrincipal";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VistaPrincipal";
             this.Load += new System.EventHandler(this.VistaPrincipal_Load);
             this.panel1.ResumeLayout(false);

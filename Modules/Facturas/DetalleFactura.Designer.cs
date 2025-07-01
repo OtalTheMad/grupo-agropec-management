@@ -125,6 +125,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "DetalleFactura";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle de Facturas";
             this.Load += new System.EventHandler(this.DetalleFactura_Load);
             this.panel1.ResumeLayout(false);

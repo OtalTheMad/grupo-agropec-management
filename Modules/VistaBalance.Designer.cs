@@ -123,9 +123,9 @@
             this.lblTotalGanancia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalGanancia.Location = new System.Drawing.Point(460, 44);
             this.lblTotalGanancia.Name = "lblTotalGanancia";
-            this.lblTotalGanancia.Size = new System.Drawing.Size(150, 18);
+            this.lblTotalGanancia.Size = new System.Drawing.Size(146, 18);
             this.lblTotalGanancia.TabIndex = 1;
-            this.lblTotalGanancia.Text = "Total de Ganancia:";
+            this.lblTotalGanancia.Text = "Total Ganancia: L.";
             // 
             // btnCalcularBalance
             // 
@@ -174,6 +174,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "VistaBalance";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Balance";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -9,6 +9,8 @@ namespace ProyectoIsis.Modules
 {
     public partial class VistaProducto : Form
     {
+        public Producto ProductoSeleccionado { get; private set; }
+
         public VistaProducto()
         {
             InitializeComponent();
@@ -49,7 +51,10 @@ namespace ProyectoIsis.Modules
             dgvProductos.Columns[4].HeaderText = "Existencias";
             dgvProductos.Columns[5].HeaderText = "Creado En";
             // Ajustar el ancho de las columnas
-            dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgvProductos.AllowUserToResizeRows = false;
+            dgvProductos.AllowUserToResizeColumns = true;
+            dgvProductos.RowHeadersVisible = false;
             dgvProductos.AllowUserToAddRows = false;
             dgvProductos.AllowUserToDeleteRows = false;
             dgvProductos.ReadOnly = true;
@@ -79,6 +84,23 @@ namespace ProyectoIsis.Modules
                     dgvProductos.DataSource = dt;
                     lblFilas.Text = $"Total de productos: {dt.Rows.Count}";
                 }
+            }
+        }
+
+        private void dgvProductos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Make sure it's not a header row
+            {
+                DataGridViewRow row = dgvProductos.Rows[e.RowIndex];
+
+                ProductoSeleccionado = new Producto
+                {
+                    IDProducto = Convert.ToInt32(row.Cells["IDProducto"].Value),
+                    Nombre = row.Cells["Nombre"].Value.ToString()
+                };
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
         }
     }
