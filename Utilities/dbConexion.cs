@@ -12,7 +12,7 @@ namespace ProyectoIsis.Data
 #if DEBUG
         private static readonly string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbFileName);
 #else
-        private static readonly string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "prod", dbFileName);
+        private static readonly string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbFileName);
 #endif
         private static readonly string connectionString = $"Data Source={dbPath};Version=3;";
 
