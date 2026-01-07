@@ -161,6 +161,7 @@ namespace ProyectoIsis.Modules
                 dgvUsuarios.ReadOnly = true;
                 dgvUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvUsuarios.MultiSelect = false;
+                dgvUsuarios.RowHeadersVisible = false;
             }
             catch (Exception ex)
             {

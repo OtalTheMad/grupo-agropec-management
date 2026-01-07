@@ -49,9 +49,8 @@ namespace ProyectoIsis
             return false;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void IniciarSesion()
         {
-            //MessageBox.Show(dbConexion.ObtenerRutaDB()); // Imprimir la ruta de la base de datos para depuración
             _user = txtUser.Text;
             _password = txtPassword.Text;
 
@@ -69,12 +68,33 @@ namespace ProyectoIsis
             }
         }
 
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            IniciarSesion();
+        }
+
         private void Login_Load(object sender, EventArgs e)
         {
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             string versionString = version.ToString();
 
             lblDev.Text = $"Desarrollado por Oscar Marcía - V{versionString}";
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                IniciarSesion();
+            }
+        }
+
+        private void txtUser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                IniciarSesion();
+            }
         }
     }
 }

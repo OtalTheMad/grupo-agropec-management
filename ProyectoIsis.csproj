@@ -25,14 +25,16 @@
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <TargetCulture>es-HN</TargetCulture>
     <ProductName>Grupo Agropec Gestión</ProductName>
     <PublisherName>Oscar Marcia</PublisherName>
+    <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
     <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>1.0.0.5</ApplicationVersion>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -83,7 +85,7 @@
     <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -298,7 +300,7 @@
     <Content Include="pdfium.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="prod\dbGrupoAgropec.sqlite">
+    <Content Include="dbGrupoAgropec.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Logos\appLogo.png" />
@@ -306,9 +308,6 @@
       <DependentUpon>ControlDeUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Logos\serviciosAgropec_mainlogo.png" />
-    <Content Include="prod\app.publish\ProyectoIsis.exe" />
-    <Content Include="prod\x64\SQLite.Interop.dll" />
-    <Content Include="prod\x86\SQLite.Interop.dll" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -390,8 +389,6 @@
     <Content Include="Resources\Logos\user_icon_x64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="prod\nl\" />
-    <Folder Include="prod\Resources\Logos\" />
     <Folder Include="Resources\Content\" />
   </ItemGroup>
   <ItemGroup>

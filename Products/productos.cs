@@ -243,7 +243,7 @@ namespace ProyectoIsis.Products
                         btnActualizar.Enabled = true;
                         return;
                     }
-                    updates.Add("PrecioVenta = @PrecioCompra");
+                    updates.Add("PrecioCompra = @PrecioCompra");
                     cmd.Parameters.AddWithValue("@PrecioCompra", precio);
                     txtPrecioCompra.BackColor = SystemColors.Window;
                 }
